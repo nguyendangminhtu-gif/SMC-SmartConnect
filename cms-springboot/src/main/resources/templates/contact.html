@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(title='Thông tin Liên hệ & FAQ')}"></head>
+<body>
+  
+  <div th:replace="~{fragments/sidebar :: sidebar(active='contact')}"></div>
+
+  <div class="main-content">
+    <div th:replace="~{fragments/topbar :: topbar(title='Thông tin Liên hệ & FAQ')}"></div>
+    
+    <div class="content-wrapper">
+        <div class="row">
+            <!-- Contact Info -->
+            <div class="col-md-6">
+                <div class="card p-4 mb-4">
+                    <h5 class="mb-4" style="font-weight: 700; color: #1e293b; margin: 0;">Thông tin Liên hệ</h5>
+                    <form th:action="@{/admin/contact/info/save}" method="POST" onsubmit="event.preventDefault(); confirmSave(this);">
+                        <input type="hidden" name="id" th:value="${info.id}">
+                        <div class="mb-4">
+                            <label class="form-label">Số điện thoại Hotline</label>
+                            <input type="text" name="hotline" class="form-control" th:value="${info.hotline}">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Số điện thoại Phụ</label>
+                            <input type="text" name="phone" class="form-control" th:value="${info.phone}">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Email Đào tạo</label>
+                            <input type="email" name="emailTraining" class="form-control" th:value="${info.emailTraining}">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Email Kinh doanh/Dịch vụ</label>
+                            <input type="email" name="emailSales" class="form-control" th:value="${info.emailSales}">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Địa chỉ</label>
+                            <textarea name="address" class="form-control" rows="2" th:text="${info.address}"></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Link Facebook</label>
+                            <input type="url" name="facebookLink" class="form-control" th:value="${info.facebookLink}">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Link Zalo</label>
+                            <input type="url" name="zaloLink" class="form-control" th:value="${info.zaloLink}">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100" style="padding: 12px; font-size: 16px;">Lưu Thông tin Liên hệ</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- FAQs -->
+            <div class="col-md-6">
+                <div class="card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 style="font-weight: 700; color: #1e293b; margin: 0;">Danh sách FAQ</h5>
+                        <button class="btn btn-primary" onclick="showAddFaqForm()"><i class="fa-solid fa-plus"></i> Thêm FAQ</button>
+                    </div>
+                    <div class="table-card">
+                        <table class="table table-hover mt-3">
+                            <thead>
+                                <tr>
+                                    <th>CÂU HỎI</th>
+                                    <th>THAO TÁC</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="faq : ${faqs}">
+                                    <td th:text="${faq.question}" style="font-weight: 600;"></td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-outline-warning" 
+                                                th:onclick="editFaq([[${faq.id}]], [[${faq.question}]], [[${faq.answer}]])"><i class="fa-solid fa-pen"></i> Sửa</button>
+                                        <form th:action="@{/admin/contact/faq/delete/{id}(id=${faq.id})}" method="POST" style="display:inline;" onsubmit="event.preventDefault(); confirmDelete(this);">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i> Xóa</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Modal FAQ Form -->
+  <div class="modal fade" id="faqModal" tabindex="-1" aria-labelledby="faqModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="faqModalLabel">Thêm/Sửa Câu hỏi thường gặp</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form th:action="@{/admin/contact/faq/save}" method="POST" id="faqForm" onsubmit="event.preventDefault(); confirmSave(this);">
+                <input type="hidden" name="id" id="edit-faq-id">
+                <div class="mb-4">
+                    <label class="form-label">Câu hỏi *</label>
+                    <input type="text" name="question" id="edit-faq-q" class="form-control" required>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Câu trả lời *</label>
+                    <textarea name="answer" id="edit-faq-a" class="form-control" rows="4" required></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer" style="justify-content: flex-start;">
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('faqForm').requestSubmit();" style="padding: 12px 30px; font-size: 16px;">Lưu Câu hỏi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div th:replace="~{fragments/scripts :: scripts}"></div>
+  <script>
+      let faqModalInstance;
+      document.addEventListener("DOMContentLoaded", function(){
+          faqModalInstance = new bootstrap.Modal(document.getElementById('faqModal'));
+      });
+
+      function showAddFaqForm() {
+          document.getElementById('edit-faq-id').value = '';
+          document.getElementById('edit-faq-q').value = '';
+          document.getElementById('edit-faq-a').value = '';
+          document.getElementById('faqModalLabel').innerText = 'Thêm FAQ Mới';
+          faqModalInstance.show();
+      }
+
+      function editFaq(id, q, a) {
+          document.getElementById('edit-faq-id').value = id;
+          document.getElementById('edit-faq-q').value = q;
+          document.getElementById('edit-faq-a').value = a;
+          document.getElementById('faqModalLabel').innerText = 'Chỉnh sửa FAQ';
+          faqModalInstance.show();
+      }
+  </script>
+</body>
+</html>

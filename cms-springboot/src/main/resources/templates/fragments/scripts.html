@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+  <div th:fragment="scripts">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- TinyMCE Editor -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.3/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+      tinymce.init({
+        selector: '.tinymce-editor',
+        plugins: 'advlist autolink lists link image charmap preview anchor pagebreak searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking table emoticons template help',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat | help',
+        menubar: 'file edit view insert format tools table help',
+        height: 500,
+        language: 'vi',
+        branding: false,
+        promotion: false,
+        content_style: 'body { font-family:Inter,sans-serif; font-size:16px; color:#334155; }'
+      });
+    </script>
+    
+    <!-- Lấy thông báo từ server để hiển thị Toast -->
+    <div th:if="${success}" style="display:none;" id="flash-success" th:text="${success}"></div>
+    <div th:if="${error}" style="display:none;" id="flash-error" th:text="${error}"></div>
+    
+    <script>
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", function() {
+          const successMsg = document.getElementById('flash-success');
+          const errorMsg = document.getElementById('flash-error');
+          if (successMsg && successMsg.innerText.trim() !== '') {
+              Toast.fire({ icon: 'success', title: successMsg.innerText });
+          }
+          if (errorMsg && errorMsg.innerText.trim() !== '') {
+              Toast.fire({ icon: 'error', title: errorMsg.innerText });
+          }
+      });
+
+      function confirmDelete(formElement) {
+          Swal.fire({
+              title: 'Xác nhận xóa?',
+              text: "Bạn có chắc chắn muốn xóa bản ghi này? Hành động này không thể hoàn tác.",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#ef4444',
+              cancelButtonColor: '#64748b',
+              confirmButtonText: 'Đồng ý xóa',
+              cancelButtonText: 'Hủy'
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  formElement.submit();
+              }
+          });
+      }
+
+      function confirmSave(formElement) {
+          Swal.fire({
+              title: 'Xác nhận lưu?',
+              text: "Bạn có chắc chắn muốn lưu thông tin này?",
+              icon: 'question',
+              showCancelButton: true,
+              confirmButtonColor: '#10b981',
+              cancelButtonColor: '#64748b',
+              confirmButtonText: 'Lưu ngay',
+              cancelButtonText: 'Hủy'
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  formElement.submit();
+              }
+          });
+      }
+    </script>
+  </div>
+</body>
+</html>

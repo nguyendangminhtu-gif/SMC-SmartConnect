@@ -1,0 +1,18 @@
+{
+  "host": "45.119.83.233",
+  "port": 22,
+  "username": "root",
+  "password": "nSmaPGEY39",
+  "remotePath": "/var/www/daotaouav.io.vn",
+  "ignore": [
+    "node_modules",
+    ".git",
+    "package.json",
+    "package-lock.json",
+    "config.json",
+    "sync.js",
+    "pull.js",
+    ".gitignore",
+    ".vscode"
+  ]
+}

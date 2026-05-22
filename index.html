@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMC SmartConnect - Đào tạo & Cấp chứng chỉ UAV Chuyên nghiệp</title>
+    <meta name="description"
+        content="Trung tâm Đào tạo Công nghệ SMC - Cấp chứng chỉ UAV do Bộ Quốc Phòng cấp. Đáp ứng quy định mới từ 01/07/2026. Lộ trình đào tạo chuẩn Nghị định 288/2025/NĐ-CP.">
+    <meta name="keywords"
+        content="đào tạo UAV, chứng chỉ UAV, thi chứng chỉ drone, học lái drone, flycam, SMC SmartConnect">
+    <meta property="og:title" content="SMC SmartConnect - Đào tạo & Cấp chứng chỉ UAV Chuyên nghiệp">
+    <meta property="og:description" content="Khóa học vận hành UAV chuẩn quốc gia. Cấp chứng chỉ hợp lệ toàn quốc.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://daotaouav.io.vn/">
+    <meta property="og:image" content="https://daotaouav.io.vn/images/hero.png">
+
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "LocalBusiness",
+          "name": "SMC SmartConnect",
+          "image": "https://daotaouav.io.vn/images/logo.png",
+          "description": "Trung tâm đào tạo và sát hạch chứng chỉ điều khiển phương tiện bay không người lái (UAV/Drone) hàng đầu Việt Nam.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Hà Nội",
+            "addressCountry": "VN"
+          },
+          "telephone": "0988.xxx.xxx",
+          "url": "https://daotaouav.io.vn/"
+        },
+        {
+          "@type": "Course",
+          "name": "Khóa học Đào tạo & Cấp chứng chỉ UAV/Drone",
+          "description": "Đào tạo lý thuyết và thực hành bay chuẩn quy định, cấp chứng chỉ UAV hợp lệ.",
+          "provider": {
+            "@type": "Organization",
+            "name": "SMC SmartConnect",
+            "sameAs": "https://daotaouav.io.vn/"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#2563eb', /* Blue 600 */
+                        secondary: '#0f172a', /* Slate 900 */
+                        accent: '#f59e0b', /* Amber 500 */
+                        surface: '#f8fafc',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'ripple': 'ripple 2s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            'from': { boxShadow: '0 0 10px -2px rgba(37,99,235,0.5)' },
+                            'to': { boxShadow: '0 0 20px 2px rgba(37,99,235,0.8)' },
+                        },
+                        ripple: {
+                            '0%': { boxShadow: '0 0 0 0 rgba(37,99,235,0.3), 0 0 0 1em rgba(37,99,235,0.3), 0 0 0 3em rgba(37,99,235,0.3), 0 0 0 5em rgba(37,99,235,0.3)' },
+                            '100%': { boxShadow: '0 0 0 1em rgba(37,99,235,0.3), 0 0 0 3em rgba(37,99,235,0.3), 0 0 0 5em rgba(37,99,235,0.3), 0 0 0 8em rgba(37,99,235,0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Hero Background with Overlay */
+        .hero-bg {
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1508614589041-895b88991e3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat fixed;
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Navbar Sticky Transition */
+        .navbar-scrolled {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
+        }
+
+        /* Cards Hover Effect */
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: rgba(37, 99, 235, 0.3);
+        }
+
+        /* Timeline Styles */
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 42px;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #2563eb, #8b5cf6);
+            border-radius: 2px;
+        }
+
+        @media (min-width: 768px) {
+            .timeline-line::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        .timeline-node {
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item.active .timeline-node {
+            box-shadow: 0 0 20px 5px rgba(37, 99, 235, 0.6);
+            background-color: #2563eb;
+            border-color: #fff;
+        }
+
+        /* Speech Bubbles */
+        .speech-bubble {
+            position: relative;
+            background: #ffffff;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 30px;
+            border-width: 15px 15px 0 0;
+            border-style: solid;
+            border-color: #ffffff transparent transparent transparent;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2563eb;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1d4ed8;
+        }
+
+        /* Floating buttons */
+        .floating-btn-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .float-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .float-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .zalo-btn {
+            background-color: #0068FF;
+        }
+
+        .phone-btn {
+            background-color: #ef4444;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+        }
+
+        .accordion-active .accordion-content {
+            max-height: 500px;
+            padding-bottom: 1.5rem;
+        }
+
+        .accordion-icon {
+            transition: transform 0.4s ease;
+        }
+
+        .accordion-active .accordion-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-slate-800 antialiased selection:bg-primary selection:text-white overflow-x-hidden">
+
+    <!-- Navbar -->
+    <header>
+        <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-secondary/95 backdrop-blur-md shadow-lg py-2">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="flex justify-between items-center">
+                    <a href="#hero" class="flex items-center gap-3 group">
+                        <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center p-1 shadow-lg group-hover:scale-105 transition-transform">
+                            <img src="images/logo.png" alt="SMC Logo" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-white font-heading font-black text-2xl tracking-tight">SMC<span
+                                class="text-primary">Connect</span></span>
+                    </a>
+
+                    <div
+                        class="hidden lg:flex items-center gap-8 bg-white/10 backdrop-blur-md px-8 py-3 rounded-full border border-white/10">
+                        <a href="#about" class="text-slate-100 hover:text-white hover:font-semibold transition-all">Về
+                            chúng tôi</a>
+                        <a href="#services"
+                            class="text-slate-100 hover:text-white hover:font-semibold transition-all">Dịch vụ</a>
+                        <a href="#roadmap" class="text-slate-100 hover:text-white hover:font-semibold transition-all">Lộ
+                            trình</a>
+                        <a href="#team" class="text-slate-100 hover:text-white hover:font-semibold transition-all">Đội
+                            ngũ</a>
+                        <a href="#testimonials"
+                            class="text-slate-100 hover:text-white hover:font-semibold transition-all">Học viên</a>
+                        <a href="#faq"
+                            class="text-slate-100 hover:text-white hover:font-semibold transition-all">FAQ</a>
+                    </div>
+
+                    <div class="hidden lg:flex items-center">
+                        <a href="#register"
+                            class="bg-gradient-to-r from-primary to-blue-400 text-white px-8 py-3 rounded-full font-bold transition-all transform hover:scale-105 hover:shadow-[0_0_20px_rgba(37,99,235,0.5)] flex items-center gap-2">
+                            Đăng ký ngay <i class="fa-solid fa-paper-plane"></i>
+                        </a>
+                    </div>
+
+                    <button id="menu-toggle" class="lg:hidden text-white text-3xl focus:outline-none">
+                        <i class="fa-solid fa-bars-staggered"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="fixed inset-0 bg-secondary/95 backdrop-blur-xl z-40 transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center gap-6">
+            <button id="close-menu" class="absolute top-8 right-8 text-white text-4xl"><i
+                    class="fa-solid fa-xmark"></i></button>
+            <a href="#about" class="text-2xl text-white font-heading font-bold hover:text-primary mobile-link">Về chúng
+                tôi</a>
+            <a href="#services" class="text-2xl text-white font-heading font-bold hover:text-primary mobile-link">Dịch
+                vụ</a>
+            <a href="#roadmap" class="text-2xl text-white font-heading font-bold hover:text-primary mobile-link">Lộ
+                trình</a>
+            <a href="#team" class="text-2xl text-white font-heading font-bold hover:text-primary mobile-link">Đội
+                ngũ</a>
+            <a href="#testimonials"
+                class="text-2xl text-white font-heading font-bold hover:text-primary mobile-link">Đánh giá</a>
+            <a href="#faq" class="text-2xl text-white font-heading font-bold hover:text-primary mobile-link">FAQ</a>
+            <a href="#register"
+                class="mt-8 bg-primary text-white px-10 py-4 rounded-full font-bold text-xl mobile-link">Đăng ký
+                ngay</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main>
+        <section id="hero"
+            class="relative min-h-screen flex items-center pt-24 pb-12 hero-bg text-white overflow-hidden">
+            <!-- Decorative particles/gradients -->
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-[120px]"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/30 rounded-full blur-[120px]"></div>
+
+            <div class="container mx-auto px-4 md:px-8 grid lg:grid-cols-12 gap-12 items-center z-10 relative">
+
+                <!-- Text Content -->
+                <div class="lg:col-span-7" data-aos="fade-right" data-aos-duration="1200">
+                    <div class="inline-flex items-center gap-3 py-2 px-4 rounded-full glass text-sm font-semibold mb-8">
+                        <span class="relative flex h-3 w-3">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                        </span>
+                        <span class="text-green-300">Đào tạo chuẩn Nghị định 288/2025/NĐ-CP</span>
+                    </div>
+
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-heading font-black leading-tight mb-6">
+                        <span class="block mb-2">HỌC & THI CHỨNG CHỈ</span>
+                        <span id="typed-text"
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-300"></span>
+                    </h1>
+
+                    <p class="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl leading-relaxed font-light">
+                        Trung tâm đào tạo và sát hạch chứng chỉ điều khiển phương tiện bay không người lái (UAV/Drone)
+                        chuyên nghiệp, uy tín hàng đầu Việt Nam.
+                    </p>
+
+                    <div class="flex flex-wrap gap-5">
+                        <a href="#register"
+                            class="bg-primary hover:bg-blue-600 text-white px-8 py-4 rounded-full font-bold text-lg transition-all transform hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(37,99,235,0.4)] flex items-center gap-3">
+                            <i class="fa-solid fa-rocket"></i> Bắt đầu ngay
+                        </a>
+                        <a href="#services"
+                            class="glass hover:bg-white/20 text-white px-8 py-4 rounded-full font-bold text-lg transition-all flex items-center gap-3">
+                            Khám phá dịch vụ
+                        </a>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-6 mt-16 pt-8 border-t border-white/10 max-w-2xl">
+                        <div>
+                            <div class="text-3xl font-black text-white mb-1">5000+</div>
+                            <div class="text-sm text-slate-400 uppercase tracking-wider">Học viên</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-black text-white mb-1">100%</div>
+                            <div class="text-sm text-slate-400 uppercase tracking-wider">Đỗ chứng chỉ</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-black text-white mb-1">5+ Năm</div>
+                            <div class="text-sm text-slate-400 uppercase tracking-wider">Kinh nghiệm</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Registration Form -->
+                <div class="lg:col-span-5" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300"
+                    id="register">
+                    <div class="glass rounded-3xl p-8 relative overflow-hidden">
+                        <!-- Decorative glow inside form -->
+                        <div class="absolute -top-20 -right-20 w-40 h-40 bg-blue-500/40 rounded-full blur-[50px]"></div>
+
+                        <div class="relative z-10">
+                            <h3 class="text-2xl font-heading font-bold text-white mb-2">Đăng Ký Tư Vấn</h3>
+                            <p class="text-slate-300 text-sm mb-6">Nhận lộ trình học và báo giá chi tiết miễn phí.</p>
+
+                            <form class="space-y-4">
+                                <div>
+                                    <input type="text" placeholder="Họ và tên *" required
+                                        class="w-full bg-white/10 border border-white/20 text-white placeholder-slate-300 rounded-xl px-5 py-4 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all">
+                                </div>
+                                <div>
+                                    <input type="tel" placeholder="Số điện thoại *" required
+                                        class="w-full bg-white/10 border border-white/20 text-white placeholder-slate-300 rounded-xl px-5 py-4 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all">
+                                </div>
+                                <div>
+                                    <select required
+                                        class="w-full bg-white/10 border border-white/20 text-white rounded-xl px-5 py-4 focus:outline-none focus:border-primary appearance-none cursor-pointer">
+                                        <option value="" disabled selected class="text-slate-800">Nhu cầu của bạn? *
+                                        </option>
+                                        <option value="daotao" class="text-slate-800">Đào tạo lái & Thi chứng chỉ
+                                        </option>
+                                        <option value="nongnghiep" class="text-slate-800">Ứng dụng nông nghiệp</option>
+                                        <option value="khaosat" class="text-slate-800">Khảo sát & Mapping</option>
+                                        <option value="quayphim" class="text-slate-800">Quay phim & Truyền thông
+                                        </option>
+                                    </select>
+                                </div>
+                                <button type="submit"
+                                    class="w-full bg-gradient-to-r from-primary to-blue-500 hover:from-blue-600 hover:to-blue-700 text-white font-bold text-lg rounded-xl px-5 py-4 mt-2 transition-all shadow-lg hover:shadow-primary/50 flex justify-center items-center gap-2">
+                                    GỬI YÊU CẦU <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                                <p class="text-xs text-center text-slate-400 mt-4">* Thông tin của bạn được bảo mật
+                                    tuyệt đối.</p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <a href="#about"
+                class="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity text-white z-20">
+                <i
+                    class="fa-solid fa-arrow-down text-xl p-3 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm"></i>
+            </a>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-24 bg-white overflow-hidden relative">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <!-- Text Column -->
+                    <div class="order-2 lg:order-1" data-aos="fade-right" data-aos-duration="1000">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="w-8 h-1 bg-primary rounded-full"></span>
+                            <span class="text-primary font-bold tracking-wider uppercase text-sm">Về SMC
+                                SmartConnect</span>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-heading font-bold text-secondary mb-6 leading-tight">
+                            Tiên phong kiến tạo <br /> <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">tương
+                                lai không gian</span>
+                        </h2>
+                        <p class="text-slate-600 mb-8 text-lg leading-relaxed">
+                            SMC SmartConnect tự hào là đơn vị uy tín hàng đầu trong lĩnh vực đào tạo, ứng dụng và cung
+                            cấp giải pháp phương tiện bay không người lái (UAV/Drone) tại Việt Nam.
+                        </p>
+
+                        <div
+                            class="bg-gradient-to-r from-blue-50 to-white border-l-4 border-primary p-6 rounded-r-2xl mb-10 shadow-sm">
+                            <h3 class="font-heading font-bold text-secondary text-xl mb-3 flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                    <i class="fa-solid fa-scale-balanced"></i>
+                                </div>
+                                Cập nhật Nghị định 288/2025/NĐ-CP
+                            </h3>
+                            <p class="text-slate-600 leading-relaxed">
+                                Theo quy định mới nhất, người điều khiển UAV bắt buộc phải trải qua khóa đào tạo chính
+                                quy, sát hạch và được cấp chứng chỉ hợp lệ. SMC cam kết lộ trình học 100% tuân thủ pháp
+                                luật, đảm bảo an toàn hàng không.
+                            </p>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center shrink-0 text-primary text-xl shadow-inner">
+                                    <i class="fa-solid fa-user-tie"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-secondary text-lg mb-1">Giảng viên thực chiến</h4>
+                                    <p class="text-slate-600">Đội ngũ chuyên gia, phi công có trên 5 năm kinh nghiệm bay
+                                        thực tế các dự án lớn.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center shrink-0 text-primary text-xl shadow-inner">
+                                    <i class="fa-solid fa-microchip"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-secondary text-lg mb-1">Trang thiết bị hiện đại</h4>
+                                    <p class="text-slate-600">Thực hành 100% trên các dòng Drone mới nhất từ DJI
+                                        Enterprise, Autel Robotics.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center shrink-0 text-primary text-xl shadow-inner">
+                                    <i class="fa-solid fa-file-shield"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-secondary text-lg mb-1">Hỗ trợ pháp lý trọn gói</h4>
+                                    <p class="text-slate-600">Tư vấn và hỗ trợ thực hiện hồ sơ xin cấp phép bay trên
+                                        toàn lãnh thổ Việt Nam.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image Column -->
+                    <div class="order-1 lg:order-2 relative" data-aos="fade-left" data-aos-duration="1000">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-purple-500/20 rounded-full blur-[80px] z-0">
+                        </div>
+
+                        <div class="relative z-10 animate-float">
+                            <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Drone chuyên dụng"
+                                class="w-full max-w-lg mx-auto rounded-3xl shadow-2xl object-cover aspect-[4/3]">
+                        </div>
+
+                        <!-- Floating Badge -->
+                        <div class="absolute -bottom-10 right-0 md:right-10 bg-white p-6 rounded-2xl shadow-2xl z-20 flex items-center gap-5 border border-slate-100"
+                            data-aos="zoom-in" data-aos-delay="400">
+                            <div
+                                class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 text-white rounded-full flex items-center justify-center text-3xl shadow-lg">
+                                <i class="fa-solid fa-check-double"></i>
+                            </div>
+                            <div>
+                                <p class="text-slate-500 font-bold uppercase tracking-wider mb-1 text-xs">Chứng nhận</p>
+                                <p class="text-secondary font-heading font-black text-xl">Chuẩn Quốc Gia</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-24 bg-surface relative">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-20" data-aos="fade-up">
+                    <div class="flex items-center justify-center gap-2 mb-4">
+                        <span class="w-8 h-1 bg-primary rounded-full"></span>
+                        <span class="text-primary font-bold tracking-wider uppercase text-sm">Lĩnh Vực Hoạt Động</span>
+                        <span class="w-8 h-1 bg-primary rounded-full"></span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-secondary mb-6">Giải Pháp UAV Toàn Diện
+                    </h2>
+                    <p class="text-slate-600 text-lg">Ứng dụng công nghệ Drone hiện đại vào đa dạng ngành nghề, mang lại
+                        hiệu quả vượt trội và tối ưu hóa chi phí.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Service 1 -->
+                    <article
+                        class="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-lg service-card group relative overflow-hidden"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <div
+                            class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -z-0 transition-transform duration-500 group-hover:scale-[2] opacity-50 group-hover:bg-blue-600">
+                        </div>
+
+                        <div class="relative z-10">
+                            <div
+                                class="w-16 h-16 bg-white border border-slate-100 text-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-8 shadow-sm group-hover:text-white group-hover:border-transparent group-hover:bg-transparent transition-all duration-300">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <h3
+                                class="font-heading text-2xl font-bold text-secondary mb-4 group-hover:text-white transition-colors duration-300">
+                                Đào Tạo & <br>Cấp Chứng Chỉ</h3>
+                            <p class="text-slate-600 mb-8 group-hover:text-blue-100 transition-colors duration-300">Đào
+                                tạo lý thuyết, thực hành bay chuẩn quy định. Hỗ trợ sát hạch cấp chứng chỉ hợp pháp toàn
+                                quốc.</p>
+                            <a href="#"
+                                class="inline-flex items-center text-blue-600 font-bold group-hover:text-white transition-colors">
+                                Xem chi tiết <i
+                                    class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Service 2 -->
+                    <article
+                        class="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-lg service-card group relative overflow-hidden"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <div
+                            class="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-bl-full -z-0 transition-transform duration-500 group-hover:scale-[2] opacity-50 group-hover:bg-emerald-500">
+                        </div>
+
+                        <div class="relative z-10">
+                            <div
+                                class="w-16 h-16 bg-white border border-slate-100 text-emerald-500 rounded-2xl flex items-center justify-center text-3xl mb-8 shadow-sm group-hover:text-white group-hover:border-transparent group-hover:bg-transparent transition-all duration-300">
+                                <i class="fa-solid fa-leaf"></i>
+                            </div>
+                            <h3
+                                class="font-heading text-2xl font-bold text-secondary mb-4 group-hover:text-white transition-colors duration-300">
+                                Nông Nghiệp <br>Thông Minh</h3>
+                            <p class="text-slate-600 mb-8 group-hover:text-emerald-50 transition-colors duration-300">
+                                Phun thuốc, rải phân, gieo hạt tự động. Phân tích sức khỏe mùa màng bằng Drone đa phổ.
+                            </p>
+                            <a href="#"
+                                class="inline-flex items-center text-emerald-500 font-bold group-hover:text-white transition-colors">
+                                Xem chi tiết <i
+                                    class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Service 3 -->
+                    <article
+                        class="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-lg service-card group relative overflow-hidden"
+                        data-aos="fade-up" data-aos-delay="300">
+                        <div
+                            class="absolute top-0 right-0 w-32 h-32 bg-amber-50 rounded-bl-full -z-0 transition-transform duration-500 group-hover:scale-[2] opacity-50 group-hover:bg-amber-500">
+                        </div>
+
+                        <div class="relative z-10">
+                            <div
+                                class="w-16 h-16 bg-white border border-slate-100 text-amber-500 rounded-2xl flex items-center justify-center text-3xl mb-8 shadow-sm group-hover:text-white group-hover:border-transparent group-hover:bg-transparent transition-all duration-300">
+                                <i class="fa-solid fa-map-location-dot"></i>
+                            </div>
+                            <h3
+                                class="font-heading text-2xl font-bold text-secondary mb-4 group-hover:text-white transition-colors duration-300">
+                                Khảo Sát & <br>Mapping 3D</h3>
+                            <p class="text-slate-600 mb-8 group-hover:text-amber-50 transition-colors duration-300">Lập
+                                bản đồ 2D/3D, khảo sát địa hình độ chính xác cao bằng công nghệ RTK/PPK chuyên dụng.</p>
+                            <a href="#"
+                                class="inline-flex items-center text-amber-500 font-bold group-hover:text-white transition-colors">
+                                Xem chi tiết <i
+                                    class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Service 4 -->
+                    <article
+                        class="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-lg service-card group relative overflow-hidden"
+                        data-aos="fade-up" data-aos-delay="400">
+                        <div
+                            class="absolute top-0 right-0 w-32 h-32 bg-purple-50 rounded-bl-full -z-0 transition-transform duration-500 group-hover:scale-[2] opacity-50 group-hover:bg-purple-500">
+                        </div>
+
+                        <div class="relative z-10">
+                            <div
+                                class="w-16 h-16 bg-white border border-slate-100 text-purple-500 rounded-2xl flex items-center justify-center text-3xl mb-8 shadow-sm group-hover:text-white group-hover:border-transparent group-hover:bg-transparent transition-all duration-300">
+                                <i class="fa-solid fa-video"></i>
+                            </div>
+                            <h3
+                                class="font-heading text-2xl font-bold text-secondary mb-4 group-hover:text-white transition-colors duration-300">
+                                Quay Phim & <br>Media Sự Kiện</h3>
+                            <p class="text-slate-600 mb-8 group-hover:text-purple-50 transition-colors duration-300">
+                                Cung cấp giải pháp hình ảnh, video trên không 4K/8K cho điện ảnh, TVC và sự kiện quy mô
+                                lớn.</p>
+                            <a href="#"
+                                class="inline-flex items-center text-purple-500 font-bold group-hover:text-white transition-colors">
+                                Xem chi tiết <i
+                                    class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap Section -->
+        <section id="roadmap" class="py-24 bg-secondary text-white relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10"
+                style="background-image: radial-gradient(#38bdf8 1px, transparent 1px); background-size: 30px 30px;">
+            </div>
+
+            <div class="container mx-auto px-4 md:px-8 relative z-10">
+                <div class="text-center max-w-3xl mx-auto mb-20" data-aos="fade-up">
+                    <span
+                        class="text-primary font-bold tracking-wider uppercase text-sm border border-primary/30 bg-primary/10 px-4 py-1.5 rounded-full inline-block mb-4">Quy
+                        Trình Chuẩn Hóa</span>
+                    <h2 class="text-4xl md:text-5xl font-heading font-bold mb-6">Lộ Trình Học & Thi Chứng Chỉ</h2>
+                    <p class="text-slate-400 text-lg">Hành trình 4 bước tinh gọn giúp bạn nắm vững kiến thức và kỹ năng
+                        bay một cách tự tin và hợp pháp.</p>
+                </div>
+
+                <div class="relative max-w-5xl mx-auto py-10 timeline-line">
+
+                    <!-- Step 1 -->
+                    <div class="relative flex items-center justify-between mb-24 timeline-item group"
+                        data-aos="fade-up">
+                        <div class="hidden md:block w-5/12"></div>
+                        <div
+                            class="absolute left-5 md:left-1/2 transform md:-translate-x-1/2 w-12 h-12 rounded-full bg-secondary border-4 border-slate-600 timeline-node z-10 flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-all">
+                            <span class="font-heading font-black text-white">1</span>
+                        </div>
+                        <div class="w-full pl-24 md:pl-0 md:w-5/12">
+                            <div
+                                class="bg-slate-800/60 backdrop-blur-md p-8 rounded-3xl border border-slate-700/50 hover:border-primary/50 transition-colors hover:shadow-[0_0_30px_rgba(37,99,235,0.15)]">
+                                <div
+                                    class="text-primary text-3xl mb-4 bg-primary/10 w-14 h-14 rounded-xl flex items-center justify-center">
+                                    <i class="fa-solid fa-user-plus"></i></div>
+                                <h3 class="font-heading text-2xl font-bold text-white mb-3">Đăng Ký & Tư Vấn</h3>
+                                <p class="text-slate-400 leading-relaxed">Học viên cung cấp thông tin. Chuyên viên SMC
+                                    sẽ liên hệ khảo sát nhu cầu, tư vấn lộ trình học phù hợp và hướng dẫn chuẩn bị hồ sơ
+                                    pháp lý chuẩn.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="relative flex items-center justify-between mb-24 timeline-item group"
+                        data-aos="fade-up">
+                        <div class="w-full pl-24 md:pl-0 md:w-5/12 md:text-right">
+                            <div
+                                class="bg-slate-800/60 backdrop-blur-md p-8 rounded-3xl border border-slate-700/50 hover:border-primary/50 transition-colors hover:shadow-[0_0_30px_rgba(37,99,235,0.15)] md:flex md:flex-col md:items-end">
+                                <div
+                                    class="text-primary text-3xl mb-4 bg-primary/10 w-14 h-14 rounded-xl flex items-center justify-center">
+                                    <i class="fa-solid fa-book-open"></i></div>
+                                <h3 class="font-heading text-2xl font-bold text-white mb-3">Học Lý Thuyết Hàng Không
+                                </h3>
+                                <p class="text-slate-400 leading-relaxed md:text-right">Nắm vững luật Hàng không dân
+                                    dụng, khí tượng học, nguyên lý khí động học và nhận biết các khu vực cấm bay. Hỗ trợ
+                                    học Online/Offline linh hoạt.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute left-5 md:left-1/2 transform md:-translate-x-1/2 w-12 h-12 rounded-full bg-secondary border-4 border-slate-600 timeline-node z-10 flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-all">
+                            <span class="font-heading font-black text-white">2</span>
+                        </div>
+                        <div class="hidden md:block w-5/12"></div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="relative flex items-center justify-between mb-24 timeline-item group"
+                        data-aos="fade-up">
+                        <div class="hidden md:block w-5/12"></div>
+                        <div
+                            class="absolute left-5 md:left-1/2 transform md:-translate-x-1/2 w-12 h-12 rounded-full bg-secondary border-4 border-slate-600 timeline-node z-10 flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-all">
+                            <span class="font-heading font-black text-white">3</span>
+                        </div>
+                        <div class="w-full pl-24 md:pl-0 md:w-5/12">
+                            <div
+                                class="bg-slate-800/60 backdrop-blur-md p-8 rounded-3xl border border-slate-700/50 hover:border-primary/50 transition-colors hover:shadow-[0_0_30px_rgba(37,99,235,0.15)]">
+                                <div
+                                    class="text-primary text-3xl mb-4 bg-primary/10 w-14 h-14 rounded-xl flex items-center justify-center">
+                                    <i class="fa-solid fa-gamepad"></i></div>
+                                <h3 class="font-heading text-2xl font-bold text-white mb-3">Huấn Luyện Thực Hành</h3>
+                                <p class="text-slate-400 leading-relaxed">Rèn luyện phản xạ trên phần mềm Simulator. Sau
+                                    đó thực hành bay thực tế tại bãi tập tiêu chuẩn, giảng viên kèm 1-1 từ cơ bản đến xử
+                                    lý tình huống khẩn cấp.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="relative flex items-center justify-between timeline-item group" data-aos="fade-up">
+                        <div class="w-full pl-24 md:pl-0 md:w-5/12 md:text-right">
+                            <div
+                                class="bg-slate-800/60 backdrop-blur-md p-8 rounded-3xl border border-slate-700/50 hover:border-primary/50 transition-colors hover:shadow-[0_0_30px_rgba(37,99,235,0.15)] md:flex md:flex-col md:items-end">
+                                <div
+                                    class="text-primary text-3xl mb-4 bg-primary/10 w-14 h-14 rounded-xl flex items-center justify-center">
+                                    <i class="fa-solid fa-certificate"></i></div>
+                                <h3 class="font-heading text-2xl font-bold text-white mb-3">Sát Hạch & Cấp Chứng Chỉ
+                                </h3>
+                                <p class="text-slate-400 leading-relaxed md:text-right">Tham gia kỳ thi sát hạch bao gồm
+                                    lý thuyết và kỹ năng bay. Hoàn tất hồ sơ gửi cơ quan thẩm quyền để cấp chứng chỉ
+                                    chính quy, có giá trị pháp lý toàn quốc.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute left-5 md:left-1/2 transform md:-translate-x-1/2 w-12 h-12 rounded-full bg-secondary border-4 border-slate-600 timeline-node z-10 flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-all">
+                            <span class="font-heading font-black text-white">4</span>
+                        </div>
+                        <div class="hidden md:block w-5/12"></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section id="team" class="py-24 bg-white">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                    <div class="max-w-2xl" data-aos="fade-right">
+                        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Giảng Viên &
+                            Chuyên Gia</span>
+                        <h2 class="text-4xl md:text-5xl font-heading font-bold text-secondary">Đội Ngũ Hàng Đầu</h2>
+                    </div>
+                    <div class="flex gap-4" data-aos="fade-left">
+                        <button
+                            class="team-prev w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-primary hover:text-white hover:border-primary transition-colors">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                        <button
+                            class="team-next w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-primary hover:text-white hover:border-primary transition-colors">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="swiper teamSwiper pb-12" data-aos="fade-up">
+                    <div class="swiper-wrapper">
+                        <!-- Member 1 -->
+                        <div class="swiper-slide">
+                            <div
+                                class="bg-surface rounded-3xl p-6 text-center group border border-slate-100 hover:shadow-xl transition-all duration-300">
+                                <div class="relative w-full aspect-square mx-auto mb-6 overflow-hidden rounded-2xl">
+                                    <img src=""images/instructor_tech.png"
+                                        alt="Chuyên gia"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-secondary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6 gap-4">
+                                        <a href="#"
+                                            class="w-10 h-10 rounded-full bg-white text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i
+                                                class="fa-brands fa-linkedin-in"></i></a>
+                                        <a href="#"
+                                            class="w-10 h-10 rounded-full bg-white text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i
+                                                class="fa-solid fa-envelope"></i></a>
+                                    </div>
+                                </div>
+                                <h3 class="font-heading text-2xl font-bold text-secondary mb-1">Trần Quang Minh</h3>
+                                <p class="text-primary font-medium text-sm mb-3">Chuyên gia Kỹ thuật & Vận hành</p>
+                                <p class="text-slate-500 text-sm">Hơn 7 năm kinh nghiệm điều khiển UAV nông nghiệp và
+                                    trắc địa phức tạp.</p>
+                            </div>
+                        </div>
+
+                        <!-- Member 2 -->
+                        <div class="swiper-slide">
+                            <div
+                                class="bg-surface rounded-3xl p-6 text-center group border border-slate-100 hover:shadow-xl transition-all duration-300">
+                                <div class="relative w-full aspect-square mx-auto mb-6 overflow-hidden rounded-2xl">
+                                    <img src=""images/instructor_media.png"
+                                        alt="Chuyên gia"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-secondary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6 gap-4">
+                                        <a href="#"
+                                            class="w-10 h-10 rounded-full bg-white text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i
+                                                class="fa-brands fa-linkedin-in"></i></a>
+                                        <a href="#"
+                                            class="w-10 h-10 rounded-full bg-white text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i
+                                                class="fa-solid fa-envelope"></i></a>
+                                    </div>
+                                </div>
+                                <h3 class="font-heading text-2xl font-bold text-secondary mb-1">Nguyễn Hải Đăng</h3>
+                                <p class="text-primary font-medium text-sm mb-3">Giảng viên Media & Điện ảnh</p>
+                                <p class="text-slate-500 text-sm">Đạo diễn hình ảnh trên không, tham gia sản xuất hàng
+                                    trăm dự án TVC.</p>
+                            </div>
+                        </div>
+
+                        <!-- Member 3 -->
+                        <div class="swiper-slide">
+                            <div
+                                class="bg-surface rounded-3xl p-6 text-center group border border-slate-100 hover:shadow-xl transition-all duration-300">
+                                <div class="relative w-full aspect-square mx-auto mb-6 overflow-hidden rounded-2xl">
+                                    <img src=""images/instructor_legal.png"
+                                        alt="Chuyên gia"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-secondary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6 gap-4">
+                                        <a href="#"
+                                            class="w-10 h-10 rounded-full bg-white text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i
+                                                class="fa-brands fa-linkedin-in"></i></a>
+                                        <a href="#"
+                                            class="w-10 h-10 rounded-full bg-white text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i
+                                                class="fa-solid fa-envelope"></i></a>
+                                    </div>
+                                </div>
+                                <h3 class="font-heading text-2xl font-bold text-secondary mb-1">Lê Ngọc Mai</h3>
+                                <p class="text-primary font-medium text-sm mb-3">Cố vấn Pháp chế Hàng không</p>
+                                <p class="text-slate-500 text-sm">Chuyên gia tư vấn cấp phép bay, hỗ trợ thủ tục với cơ
+                                    quan nhà nước.</p>
+                            </div>
+                        </div>
+
+                        <!-- Member 4 -->
+                        <div class="swiper-slide">
+                            <div
+                                class="bg-surface rounded-3xl p-6 text-center group border border-slate-100 hover:shadow-xl transition-all duration-300">
+                                <div class="relative w-full aspect-square mx-auto mb-6 overflow-hidden rounded-2xl">
+                                    <img src=""images/instructor_military.png"
+                                        alt="Chuyên gia"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-secondary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6 gap-4">
+                                        <a href="#"
+                                            class="w-10 h-10 rounded-full bg-white text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i
+                                                class="fa-brands fa-linkedin-in"></i></a>
+                                        <a href="#"
+                                            class="w-10 h-10 rounded-full bg-white text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i
+                                                class="fa-solid fa-envelope"></i></a>
+                                    </div>
+                                </div>
+                                <h3 class="font-heading text-2xl font-bold text-secondary mb-1">Phạm Văn Hùng</h3>
+                                <p class="text-primary font-medium text-sm mb-3">Giảng viên Huấn luyện Bay</p>
+                                <p class="text-slate-500 text-sm">Xuất thân Sĩ quan không quân, giảng dạy theo giáo
+                                    trình chuẩn quân đội.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="testimonials" class="py-24 bg-gradient-to-b from-surface to-white relative">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Cảm nhận học
+                        viên</span>
+                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-secondary">Thành Công Của Bạn Là Tự Hào
+                        Của SMC</h2>
+                </div>
+
+                <div class="swiper testSwiper !pb-20" data-aos="fade-up" data-aos-delay="200">
+                    <div class="swiper-wrapper">
+                        <!-- Testimonial 1 -->
+                        <div class="swiper-slide">
+                            <div class="speech-bubble h-full flex flex-col p-8 bg-white border border-slate-100 rounded-3xl shadow-lg relative">
+                                <div class="text-amber-400 mb-4 flex gap-1">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-slate-600 italic mb-6 flex-grow leading-relaxed">"SMC đã giúp tôi nắm vững hoàn toàn cách thức vận hành flycam an toàn. Giờ đây, hợp tác xã nông nghiệp của tôi hoạt động rải phân bón đúng quy định pháp luật và cực kỳ hiệu quả."</p>
+                                <div class="flex items-center gap-4 mt-auto">
+                                    <div class="w-14 h-14 rounded-full bg-slate-200 overflow-hidden shrink-0 flex items-center justify-center text-slate-500 text-xl">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-secondary font-heading text-lg">Anh Hoàng Văn T.</h4>
+                                        <span class="text-sm text-slate-500">Đồng Tháp</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 2 -->
+                        <div class="swiper-slide">
+                            <div class="speech-bubble h-full flex flex-col p-8 bg-white border border-slate-100 rounded-3xl shadow-lg relative">
+                                <div class="text-amber-400 mb-4 flex gap-1">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-slate-600 italic mb-6 flex-grow leading-relaxed">"Khoá học cực kỳ thực tế. Tôi được giảng viên cầm tay chỉ việc, bãi tập rất xịn. Nhờ có chứng chỉ, tôi tự tự nhận các hợp đồng quay phim sự kiện ngoài trời lớn."</p>
+                                <div class="flex items-center gap-4 mt-auto">
+                                    <div class="w-14 h-14 rounded-full bg-slate-200 overflow-hidden shrink-0 flex items-center justify-center text-slate-500 text-xl">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-secondary font-heading text-lg">Nguyễn Thành Nam</h4>
+                                        <span class="text-sm text-slate-500">Hà Nội</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 3 -->
+                        <div class="swiper-slide">
+                            <div class="speech-bubble h-full flex flex-col p-8 bg-white border border-slate-100 rounded-3xl shadow-lg relative">
+                                <div class="text-amber-400 mb-4 flex gap-1">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-slate-600 italic mb-6 flex-grow leading-relaxed">"Là người mới tinh nhưng nhờ thầy giáo nhiệt tình, giờ tôi đã bay rất cứng tay. Hỗ trợ làm thủ tục xin phép bay của trung tâm cũng rất nhanh chóng."</p>
+                                <div class="flex items-center gap-4 mt-auto">
+                                    <div class="w-14 h-14 rounded-full bg-slate-200 overflow-hidden shrink-0 flex items-center justify-center text-slate-500 text-xl">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-secondary font-heading text-lg">Lê Thị Thanh</h4>
+                                        <span class="text-sm text-slate-500">TP. Hồ Chí Minh</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="py-24 bg-white">
+            <div class="container mx-auto px-4 md:px-8 max-w-4xl">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-secondary mb-4">Câu Hỏi Thường Gặp</h2>
+                    <p class="text-slate-600 text-lg">Mọi thắc mắc của bạn về khóa học và chứng chỉ đều được giải đáp
+                        chi tiết tại đây.</p>
+                </div>
+
+                <div class="space-y-4" data-aos="fade-up" data-aos-delay="200">
+                    <!-- FAQ 1 -->
+                    <div
+                        class="accordion-item border border-slate-200 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow">
+                        <button class="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none"
+                            onclick="toggleAccordion(this)">
+                            <span class="font-heading font-bold text-secondary text-lg pr-4">1. Chứng chỉ do cơ quan nào
+                                cấp và có giá trị bao lâu?</span>
+                            <div
+                                class="w-8 h-8 rounded-full bg-blue-50 text-primary flex items-center justify-center shrink-0 accordion-icon">
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                        </button>
+                        <div class="accordion-content px-8">
+                            <p class="text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+                                Chứng chỉ điều khiển UAV do cơ quan thẩm quyền (Bộ Quốc Phòng / Cục Tác Chiến) cấp theo
+                                Nghị định 288/2025/NĐ-CP. Chứng chỉ có giá trị pháp lý trên toàn lãnh thổ Việt Nam và
+                                thường có thời hạn tùy vào phân loại thiết bị bay.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div
+                        class="accordion-item border border-slate-200 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow">
+                        <button class="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none"
+                            onclick="toggleAccordion(this)">
+                            <span class="font-heading font-bold text-secondary text-lg pr-4">2. Người mới chưa từng điều
+                                khiển flycam có học được không?</span>
+                            <div
+                                class="w-8 h-8 rounded-full bg-blue-50 text-primary flex items-center justify-center shrink-0 accordion-icon">
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                        </button>
+                        <div class="accordion-content px-8">
+                            <p class="text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+                                Hoàn toàn được. Chương trình học của SMC được thiết kế từ cơ bản đến nâng cao. Bạn sẽ
+                                được làm quen với phần mềm mô phỏng (Simulator) trước khi thực hành trên thiết bị thật
+                                cùng sự kèm cặp 1-1 của giảng viên.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div
+                        class="accordion-item border border-slate-200 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow">
+                        <button class="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none"
+                            onclick="toggleAccordion(this)">
+                            <span class="font-heading font-bold text-secondary text-lg pr-4">3. Hồ sơ đăng ký học và thi
+                                bao gồm những gì?</span>
+                            <div
+                                class="w-8 h-8 rounded-full bg-blue-50 text-primary flex items-center justify-center shrink-0 accordion-icon">
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                        </button>
+                        <div class="accordion-content px-8">
+                            <p class="text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+                                Hồ sơ cơ bản bao gồm: CMND/CCCD photo công chứng, Giấy khám sức khỏe, Ảnh thẻ (3x4 và
+                                4x6), và Đơn đăng ký theo mẫu của trung tâm. Chuyên viên SMC sẽ hỗ trợ bạn chuẩn bị chi
+                                tiết khi đăng ký.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-slate-300 pt-20 pb-10 border-t border-slate-800">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <!-- Col 1 -->
+                <div class="lg:col-span-1">
+                    <a href="#" class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center p-1 shadow-lg">
+                            <img src="images/logo.png" alt="SMC Logo" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-white font-heading font-black text-2xl tracking-tight">SMC<span
+                                class="text-primary">Connect</span></span>
+                    </a>
+                    <p class="mb-6 leading-relaxed text-sm">
+                        Đơn vị tiên phong cung cấp giải pháp đào tạo, cấp chứng chỉ và ứng dụng phương tiện bay không
+                        người lái (UAV/Drone) chuyên nghiệp tại Việt Nam.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i
+                                class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i
+                                class="fa-brands fa-youtube"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"><i
+                                class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2 -->
+                <div>
+                    <h4 class="text-white font-heading font-bold text-lg mb-6 relative inline-block">
+                        Liên Kết Nhanh
+                        <span class="absolute bottom-0 left-0 w-1/2 h-0.5 bg-primary transform translate-y-2"></span>
+                    </h4>
+                    <ul class="space-y-3">
+                        <li><a href="#about" class="hover:text-primary transition-colors flex items-center gap-2"><i
+                                    class="fa-solid fa-angle-right text-xs"></i> Về chúng tôi</a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors flex items-center gap-2"><i
+                                    class="fa-solid fa-angle-right text-xs"></i> Lĩnh vực dịch vụ</a></li>
+                        <li><a href="#roadmap" class="hover:text-primary transition-colors flex items-center gap-2"><i
+                                    class="fa-solid fa-angle-right text-xs"></i> Lộ trình học & thi</a></li>
+                        <li><a href="#team" class="hover:text-primary transition-colors flex items-center gap-2"><i
+                                    class="fa-solid fa-angle-right text-xs"></i> Đội ngũ giảng viên</a></li>
+                        <li><a href="#faq" class="hover:text-primary transition-colors flex items-center gap-2"><i
+                                    class="fa-solid fa-angle-right text-xs"></i> Câu hỏi thường gặp</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 -->
+                <div class="lg:col-span-2">
+                    <h4 class="text-white font-heading font-bold text-lg mb-6 relative inline-block">
+                        Thông Tin Liên Hệ
+                        <span class="absolute bottom-0 left-0 w-1/2 h-0.5 bg-primary transform translate-y-2"></span>
+                    </h4>
+                    <ul class="space-y-4 mb-6">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot mt-1 text-primary"></i>
+                            <span>Trụ sở: Tòa nhà SMC, Quận Nam Từ Liêm, TP. Hà Nội</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-primary"></i>
+                            <span>Hotline: <strong>0988.xxx.xxx</strong> (24/7)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-primary"></i>
+                            <span>Email: contact@daotaouav.io.vn</span>
+                        </li>
+                    </ul>
+                    <!-- Simple map placeholder -->
+                    <div class="w-full h-32 bg-slate-800 rounded-xl overflow-hidden relative group">
+                        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Map"
+                            class="w-full h-full object-cover opacity-50 group-hover:opacity-70 transition-opacity">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <a href="#"
+                                class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold shadow-lg hover:bg-blue-600 transition-colors">Xem
+                                Bản Đồ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+                <p>&copy; 2026 SMC SmartConnect. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-white transition-colors">Chính sách bảo mật</a>
+                    <a href="#" class="hover:text-white transition-colors">Điều khoản sử dụng</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Contact Buttons -->
+    <div class="floating-btn-container">
+        <a href="tel:0988xxxxxx" class="float-btn phone-btn animate-ripple group" title="Gọi Hotline">
+            <i class="fa-solid fa-phone"></i>
+            <span
+                class="absolute right-16 bg-white text-slate-800 text-sm font-bold px-3 py-1.5 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">0988.xxx.xxx</span>
+        </a>
+        <a href="https://zalo.me/0988xxxxxx" target="_blank" class="float-btn zalo-btn animate-ripple group"
+            title="Chat Zalo">
+            <i class="fa-solid fa-comment-dots"></i>
+            <span
+                class="absolute right-16 bg-white text-slate-800 text-sm font-bold px-3 py-1.5 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Chat
+                Zalo</span>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Typed.js -->
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            once: true,
+            offset: 50,
+        });
+
+        // Initialize Typed.js
+        var typed = new Typed('#typed-text', {
+            strings: ['UAV / DRONE', 'FLYCAM NÔNG NGHIỆP', 'FLYCAM MAPPING', 'QUAY PHIM MEDIA'],
+            typeSpeed: 60,
+            backSpeed: 40,
+            backDelay: 2000,
+            loop: true
+        });
+
+        // Sticky Navbar & Active Timeline Node
+        const navbar = document.getElementById('navbar');
+        const timelineItems = document.querySelectorAll('.timeline-item');
+
+        window.addEventListener('scroll', () => {
+            // Timeline Animation
+            timelineItems.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.75) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const closeMenu = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            if (mobileMenu.classList.contains('translate-x-full')) {
+                mobileMenu.classList.remove('translate-x-full');
+            } else {
+                mobileMenu.classList.add('translate-x-full');
+            }
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        closeMenu.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // Accordion Logic
+        function toggleAccordion(button) {
+            const item = button.parentElement;
+
+            // Close all others
+            document.querySelectorAll('.accordion-item').forEach(el => {
+                if (el !== item) el.classList.remove('accordion-active');
+            });
+
+            // Toggle current
+            item.classList.toggle('accordion-active');
+        }
+
+        // Swiper Configurations
+        const teamSwiper = new Swiper('.teamSwiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            navigation: {
+                nextEl: '.team-next',
+                prevEl: '.team-prev',
+            },
+            breakpoints: {
+                640: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+                1280: { slidesPerView: 4 },
+            }
+        });
+
+        const testSwiper = new Swiper('.testSwiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+            }
+        });
+    </script>
+</body>
+
+</html>

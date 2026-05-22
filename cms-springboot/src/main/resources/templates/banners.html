@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(title='Quản lý Banner')}"></head>
+<body>
+  
+  <div th:replace="~{fragments/sidebar :: sidebar(active='banners')}"></div>
+
+  <div class="main-content">
+    <div th:replace="~{fragments/topbar :: topbar(title='Quản lý Banner')}"></div>
+    
+    <div class="content-wrapper">
+        <div class="card p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 style="font-weight: 700; color: #1e293b; margin: 0;">Quản lý hình ảnh Banner (Tất cả trang)</h5>
+                <button class="btn btn-primary" onclick="showAddForm()"><i class="fa-solid fa-plus"></i> Thêm banner</button>
+            </div>
+            
+            <div class="table-card">
+                <table class="table table-hover mt-3">
+                    <thead>
+                        <tr>
+                            <th>HÌNH ẢNH (DEMO)</th>
+                            <th>TÊN BANNER</th>
+                            <th>VỊ TRÍ (TRANG)</th>
+                            <th>TRẠNG THÁI</th>
+                            <th>THAO TÁC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="banner : ${banners}">
+                            <td style="width: 150px;"><img th:src="${banner.imageUrl}" class="image-preview"></td>
+                            <td>
+                                <strong th:text="${banner.title}"></strong><br>
+                                <a th:href="${banner.imageUrl}" target="_blank" style="font-size: 12px; color: var(--primary-color); text-decoration: none;">Xem link ảnh</a>
+                            </td>
+                            <td><span class="badge bg-light text-dark border" th:text="${banner.page}">Trang chủ</span></td>
+                            <td><span class="badge badge-status">Đang hiển thị</span></td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-outline-warning" 
+                                        th:onclick="editItem([[${banner.id}]], [[${banner.page}]], [[${banner.title}]], [[${banner.subtitle}]], [[${banner.imageUrl}]])">
+                                    <i class="fa-solid fa-pen"></i> Sửa
+                                </button>
+                                <form th:action="@{/admin/banners/delete/{id}(id=${banner.id})}" method="POST" style="display:inline;" onsubmit="event.preventDefault(); confirmDelete(this);">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i> Xóa</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> <!-- Close content-wrapper -->
+  </div> <!-- Close main-content -->
+
+  <!-- Modal Form -->
+  <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="formModalLabel">Thêm/Sửa Banner</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form th:action="@{/admin/banners/save}" method="POST" enctype="multipart/form-data" id="mainForm" onsubmit="event.preventDefault(); confirmSave(this);">
+                <input type="hidden" name="id" id="edit-id">
+                <input type="hidden" name="subtitle" id="edit-subtitle">
+                
+                <div class="mb-4">
+                    <label class="form-label">Tên/Tiêu đề Banner *</label>
+                    <input type="text" name="title" id="edit-title" class="form-control" placeholder="Nhập tên banner" required>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="form-label">Tải lên Hình ảnh *</label>
+                    <input type="file" name="image" id="edit-image" class="form-control" accept="image/*" onchange="previewImage(this)">
+                    <img id="image-preview-element" class="image-upload-preview" src="">
+                </div>
+                
+                <div class="mb-4">
+                    <label class="form-label">Vị trí hiển thị (Trang)</label>
+                    <select name="page" id="edit-page" class="form-select" required>
+                        <option value="Trang chủ">Trang chủ</option>
+                        <option value="Khóa học">Khóa học</option>
+                    </select>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="form-label">Trạng thái</label>
+                    <select class="form-select">
+                        <option>Đang hiển thị</option>
+                        <option>Ẩn</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer" style="justify-content: flex-start;">
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('mainForm').requestSubmit();" style="padding: 12px 30px; font-size: 16px;">Lưu Banner</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div th:replace="~{fragments/scripts :: scripts}"></div>
+  <script>
+      let modalInstance;
+      document.addEventListener("DOMContentLoaded", function(){
+          modalInstance = new bootstrap.Modal(document.getElementById('formModal'));
+      });
+
+      function showAddForm() {
+          document.getElementById('edit-id').value = '';
+          document.getElementById('edit-page').value = 'Trang chủ';
+          document.getElementById('edit-title').value = '';
+          document.getElementById('edit-subtitle').value = '';
+          document.getElementById('image-preview-element').style.display = 'none';
+          document.getElementById('formModalLabel').innerText = 'Thêm Banner Mới';
+          modalInstance.show();
+      }
+
+      function editItem(id, page, title, subtitle, imageUrl) {
+          document.getElementById('edit-id').value = id;
+          document.getElementById('edit-page').value = page;
+          document.getElementById('edit-title').value = title;
+          document.getElementById('edit-subtitle').value = subtitle;
+          
+          if(imageUrl) {
+              document.getElementById('image-preview-element').src = imageUrl;
+              document.getElementById('image-preview-element').style.display = 'block';
+          } else {
+              document.getElementById('image-preview-element').style.display = 'none';
+          }
+          
+          document.getElementById('formModalLabel').innerText = 'Chỉnh sửa Banner';
+          modalInstance.show();
+      }
+
+      function previewImage(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                  document.getElementById('image-preview-element').src = e.target.result;
+                  document.getElementById('image-preview-element').style.display = 'block';
+              }
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
+  </script>
+</body>
+</html>

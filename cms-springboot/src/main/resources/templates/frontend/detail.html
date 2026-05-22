@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${item.metaTitle != null && !item.metaTitle.isEmpty() ? item.metaTitle : item.title}">Chi tiết | SMC SmartConnect</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" th:content="${item.metaDescription != null ? item.metaDescription : ''}">
+    <meta name="keywords" th:content="${item.metaKeywords != null ? item.metaKeywords : ''}">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/style.css">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" th:content="${item.metaTitle != null && !item.metaTitle.isEmpty() ? item.metaTitle : item.title}">
+    <meta property="og:description" th:content="${item.metaDescription != null ? item.metaDescription : ''}">
+    <meta property="og:image" th:content="${item.imageUrl != null ? item.imageUrl : '/images/hero.png'}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="/" class="logo">
+                <img src="/images/logo.png" alt="SMC Logo" class="nav-logo-img">
+                <span>SMC SmartConnect</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Trang chủ</a></li>
+                <li class="dropdown-trigger">
+                    <a href="#">Về chúng tôi <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="/chung-toi-la-ai.html">Chúng tôi là ai</a></li>
+                        <li><a href="/chung-toi-lam-gi.html">Chúng tôi làm gì</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-trigger">
+                    <a href="#">Lĩnh vực <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i></a>
+                    <ul class="dropdown" id="industry-nav-dropdown">
+                        <!-- Thêm lĩnh vực từ API JS -->
+                    </ul>
+                </li>
+                <li class="dropdown-trigger">
+                    <a href="#">Dịch vụ <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i></a>
+                    <ul class="dropdown" style="min-width: 350px;">
+                        <li><a href="/dao-tao-cap-phep.html">Đào tạo bay UAV cơ bản - nâng cao</a></li>
+                        <li><a href="/sat-hach-cap-phep.html">Sát hạch & cấp phép UAV</a></li>
+                        <li><a href="/ung-dung-nong-nghiep.html">Ứng dụng UAV nông nghiệp</a></li>
+                        <li><a href="/khao-sat-mapping.html">Khảo sát - Mapping lập bản đồ</a></li>
+                        <li><a href="/quay-phim-su-kien.html">Quay phim sự kiện - Truyền thông</a></li>
+                        <li><a href="/cung-cap-uav.html">Cung cấp UAV chính hãng</a></li>
+                    </ul>
+                </li>
+                <li><a href="/doi-tac.html">Dự án & Đối tác</a></li>
+                <li><a href="/tin-tuc.html">Tin tức & Hình ảnh</a></li>
+                <li><a href="/#contact">Liên hệ</a></li>
+            </ul>
+            <a href="/#register" class="btn btn-primary nav-btn">Đăng ký ngay</a>
+            <div class="menu-toggle" id="mobile-menu"><i class="fa-solid fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <!-- Dynamic Content Rendered from DB -->
+    <main th:class="${type == 'Tin tức' ? 'news-detail-wrapper' : ''}">
+        
+        <!-- ======================= -->
+        <!-- FOR INDUSTRY & SERVICES -->
+        <!-- ======================= -->
+        <th:block th:if="${type != 'Tin tức'}">
+            <!-- Section 1: Hero Banner (Dark background) -->
+            <section class="sector-banner">
+                <div class="container">
+                    <div class="breadcrumbs">
+                        <a href="/">Trang chủ</a>
+                        <i class="fa-solid fa-chevron-right"></i>
+                        <a href="#" th:text="${type}">Lĩnh vực</a>
+                        <i class="fa-solid fa-chevron-right"></i>
+                        <a href="#" th:text="${item.title}">Tên lĩnh vực</a>
+                    </div>
+                </div>
+                <div class="sector-banner-container">
+                    <h1 class="serif-title" th:text="${item.title}">Tên Lĩnh Vực / Dịch vụ</h1>
+                    <p class="subtitle" th:text="${item.description}">Mô tả ngắn...</p>
+                </div>
+            </section>
+            
+            <!-- Section 2: Features (Cream background) -->
+            <section class="bg-cream" style="padding-top: 60px; padding-bottom: 60px;">
+                <div th:utext="${item.content}"></div>
+            </section>
+        </th:block>
+
+        <!-- ======================= -->
+        <!-- FOR NEWS                -->
+        <!-- ======================= -->
+        <th:block th:if="${type == 'Tin tức'}">
+            <div class="container">
+                <div class="breadcrumbs">
+                    <a href="/">Trang chủ</a>
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <a href="/tin-tuc.html">Tin tức & Hình ảnh</a>
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <a href="#" th:text="${item.title}">Tiêu đề tin tức</a>
+                </div>
+            </div>
+            
+            <div class="news-detail-container">
+                <div class="news-detail-meta">
+                    <i class="fa-regular fa-calendar"></i>
+                    <span th:text="${item.createdAt != null ? item.createdAt : 'Mới cập nhật'}">27 Tháng 11, 2024</span>
+                    <span style="margin: 0 10px; color: var(--gold);">|</span>
+                    <i class="fa-solid fa-tag"></i>
+                    <span th:text="${type}">Tin tức</span>
+                </div>
+                
+                <h1 class="news-detail-title" th:text="${item.title}">Tiêu đề tin tức</h1>
+                
+                <!-- Restored Image -->
+                <img th:if="${item.imageUrl != null and !item.imageUrl.isEmpty()}" th:src="${item.imageUrl}" th:alt="${item.title}" class="news-detail-image">
+                
+                <div class="news-detail-content" th:utext="${item.content}">
+                </div>
+                
+                <div style="margin-top: 60px; padding-top: 30px; border-top: 1px solid #e2e8f0; text-align: center;">
+                    <a href="/tin-tuc.html" class="btn btn-outline" style="padding: 12px 30px; border: 2px solid var(--primary-blue); color: var(--primary-blue); font-weight: 600; border-radius: 8px; text-decoration: none; transition: 0.3s;"><i class="fa-solid fa-arrow-left" style="margin-right: 8px;"></i> Quay lại danh sách tin tức</a>
+                </div>
+            </div>
+        </th:block>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo-wrapper">
+                    <div class="footer-logo-bg">
+                        <img src="/images/logo.png" alt="SMC Logo" class="footer-logo-img">
+                    </div>
+                    <h4 class="footer-logo-text">SMC SmartConnect</h4>
+                </div>
+                <p class="copyright">© 2024 Công ty TNHH Công nghệ Smartconnect. Tất cả quyền được bảo lưu.</p>
+            </div>
+            <div class="footer-col">
+                <h5>TRUNG TÂM ĐÀO TẠO SMC</h5>
+                <ul class="contact-list" id="footer-contact-info">
+                    <li><i class="fa-solid fa-phone"></i> <span><strong>Hotline:</strong> 1900 638 939 (Nhánh 2)</span></li>
+                    <li><i class="fa-solid fa-mobile-screen"></i> <span><strong>SĐT:</strong> 0902 596 999</span></li>
+                    <li><i class="fa-solid fa-envelope"></i> <span><strong>Kinh doanh:</strong> sales@smartconnect.com.vn</span></li>
+                    <li><i class="fa-solid fa-envelope"></i> <span><strong>Đào tạo:</strong> ktsmc.coltd@gmail.com</span></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>MẠNG XÃ HỘI & LIÊN KẾT</h5>
+                <ul class="social-links">
+                    <li><a href="https://smartconnect.com.vn/" target="_blank"><i class="fa-solid fa-globe"></i> Website Công Ty</a></li>
+                    <li><a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fa-solid fa-comment-dots"></i> Zalo</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="/mobile-menu.js"></script>
+</body>
+</html>

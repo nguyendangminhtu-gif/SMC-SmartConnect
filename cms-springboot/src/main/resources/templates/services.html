@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(title='Dịch vụ')}"></head>
+<body>
+  
+  <div th:replace="~{fragments/sidebar :: sidebar(active='services')}"></div>
+
+  <div class="main-content">
+    <div th:replace="~{fragments/topbar :: topbar(title='Quản lý Dịch vụ')}"></div>
+    
+    <div class="content-wrapper">
+        <div class="card p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 style="font-weight: 700; color: #1e293b; margin: 0;">Quản lý Dịch vụ</h5>
+                <button class="btn btn-primary" onclick="showAddForm()"><i class="fa-solid fa-plus"></i> Thêm dịch vụ</button>
+            </div>
+            
+            <div class="table-card">
+                <table class="table table-hover mt-3">
+                    <thead>
+                        <tr>
+                            <th>TIÊU ĐỀ</th>
+                            <th>ICON</th>
+                            <th>HÌNH ẢNH</th>
+                            <th>MÔ TẢ</th>
+                            <th>THAO TÁC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${items}">
+                            <td th:text="${item.title}" style="font-weight: 600;"></td>
+                            <td><i th:class="${item.icon}" style="font-size: 20px; color: var(--primary-color);"></i></td>
+                            <td style="width: 150px;"><img th:if="${item.imageUrl != null}" th:src="${item.imageUrl}" class="image-preview"></td>
+                            <td th:text="${item.description}"></td>
+                            <td>
+                                <textarea style="display:none;" th:id="'content-data-' + ${item.id}" th:text="${item.content}"></textarea>
+                                <button type="button" class="btn btn-sm btn-outline-warning" 
+                                        th:onclick="editItem([[${item.id}]], [[${item.title}]], [[${item.icon}]], [[${item.description}]], [[${item.slug}]], [[${item.metaTitle}]], [[${item.metaDescription}]], [[${item.metaKeywords}]], [[${item.imageUrl}]])">
+                                    <i class="fa-solid fa-pen"></i> Sửa
+                                </button>
+                                <form th:action="@{/admin/services/delete/{id}(id=${item.id})}" method="POST" style="display:inline;" onsubmit="event.preventDefault(); confirmDelete(this);">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i> Xóa</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Modal Form -->
+  <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="formModalLabel">Thêm/Sửa Dịch vụ</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form th:action="@{/admin/services/save}" method="POST" enctype="multipart/form-data" id="mainForm" onsubmit="event.preventDefault(); confirmSave(this);">
+                <input type="hidden" name="id" id="edit-id">
+                
+                <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab">Thông tin chung</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="seo-tab" data-bs-toggle="tab" data-bs-target="#seo" type="button" role="tab">Cấu hình SEO</button>
+                  </li>
+                </ul>
+                
+                <div class="tab-content" id="myTabContent">
+                  <!-- General Tab -->
+                  <div class="tab-pane fade show active" id="general" role="tabpanel">
+                      <div class="row">
+                          <div class="col-md-6 mb-4">
+                              <label class="form-label">Tiêu đề *</label>
+                              <input type="text" name="title" id="edit-title" class="form-control" required>
+                          </div>
+                          <div class="col-md-6 mb-4">
+                              <label class="form-label">Icon (Class FontAwesome)</label>
+                              <input type="text" name="icon" id="edit-icon" class="form-control" placeholder="fa-solid fa-drone">
+                          </div>
+                          <div class="col-md-12 mb-4">
+                              <label class="form-label">Tải lên Hình ảnh *</label>
+                              <input type="file" name="image" id="edit-image" class="form-control" accept="image/*" onchange="previewImage(this)">
+                              <img id="image-preview-element" class="image-upload-preview" src="">
+                          </div>
+                          <div class="col-md-12 mb-4">
+                              <label class="form-label">Mô tả ngắn</label>
+                              <textarea name="description" id="edit-desc" class="form-control" rows="3" required></textarea>
+                          </div>
+                          <div class="col-md-12 mb-4">
+                              <label class="form-label">Nội dung chi tiết</label>
+                              <textarea name="content" id="edit-content" class="form-control tinymce-editor" rows="15"></textarea>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <!-- SEO Tab -->
+                  <div class="tab-pane fade" id="seo" role="tabpanel">
+                      <div class="row">
+                          <div class="col-md-12 mb-4">
+                              <label class="form-label">Đường dẫn tĩnh (Slug)</label>
+                              <input type="text" name="slug" id="edit-slug" class="form-control" placeholder="vi-du-duong-dan-tinh">
+                          </div>
+                          <div class="col-md-12 mb-4">
+                              <label class="form-label">Tiêu đề SEO (Meta Title)</label>
+                              <input type="text" name="metaTitle" id="edit-metaTitle" class="form-control">
+                          </div>
+                          <div class="col-md-12 mb-4">
+                              <label class="form-label">Từ khóa SEO (Meta Keywords)</label>
+                              <input type="text" name="metaKeywords" id="edit-metaKeywords" class="form-control">
+                          </div>
+                          <div class="col-md-12 mb-4">
+                              <label class="form-label">Mô tả SEO (Meta Description)</label>
+                              <textarea name="metaDescription" id="edit-metaDescription" class="form-control" rows="3"></textarea>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer" style="justify-content: flex-start;">
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('mainForm').requestSubmit();" style="padding: 12px 30px; font-size: 16px;">Lưu Dịch vụ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div th:replace="~{fragments/scripts :: scripts}"></div>
+  <script>
+      let modalInstance;
+      document.addEventListener("DOMContentLoaded", function(){
+          modalInstance = new bootstrap.Modal(document.getElementById('formModal'));
+      });
+
+      function showAddForm() {
+          document.getElementById('edit-id').value = '';
+          document.getElementById('edit-title').value = '';
+          document.getElementById('edit-icon').value = '';
+          document.getElementById('edit-desc').value = '';
+          document.getElementById('edit-slug').value = '';
+          document.getElementById('edit-metaTitle').value = '';
+          document.getElementById('edit-metaKeywords').value = '';
+          document.getElementById('edit-metaDescription').value = '';
+          document.getElementById('image-preview-element').style.display = 'none';
+          
+          if(tinymce.get('edit-content')) {
+              tinymce.get('edit-content').setContent('');
+          } else {
+              document.getElementById('edit-content').value = '';
+          }
+          
+          document.getElementById('formModalLabel').innerText = 'Thêm Dịch vụ Mới';
+          modalInstance.show();
+      }
+
+      function editItem(id, title, icon, desc, slug, metaTitle, metaDesc, metaKey, imageUrl) {
+          document.getElementById('edit-id').value = id;
+          document.getElementById('edit-title').value = title;
+          document.getElementById('edit-icon').value = icon;
+          document.getElementById('edit-desc').value = desc;
+          document.getElementById('edit-slug').value = slug || '';
+          document.getElementById('edit-metaTitle').value = metaTitle || '';
+          document.getElementById('edit-metaDescription').value = metaDesc || '';
+          document.getElementById('edit-metaKeywords').value = metaKey || '';
+          
+          if(imageUrl) {
+              document.getElementById('image-preview-element').src = imageUrl;
+              document.getElementById('image-preview-element').style.display = 'block';
+          } else {
+              document.getElementById('image-preview-element').style.display = 'none';
+          }
+          
+          let contentHtml = document.getElementById('content-data-' + id).value;
+          if(tinymce.get('edit-content')) {
+              tinymce.get('edit-content').setContent(contentHtml);
+          } else {
+              document.getElementById('edit-content').value = contentHtml;
+          }
+          
+          document.getElementById('formModalLabel').innerText = 'Chỉnh sửa Dịch vụ';
+          modalInstance.show();
+      }
+
+      function previewImage(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                  document.getElementById('image-preview-element').src = e.target.result;
+                  document.getElementById('image-preview-element').style.display = 'block';
+              }
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
+  </script>
+</body>
+</html>

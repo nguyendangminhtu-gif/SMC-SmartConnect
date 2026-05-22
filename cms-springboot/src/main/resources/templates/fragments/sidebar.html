@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Sidebar</title>
+</head>
+<body>
+  <div th:fragment="sidebar" class="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-box">
+        <img th:src="@{/images/logo.png}" alt="SMC Logo">
+      </div>
+      <div class="brand-text">
+        <div class="brand-title">SMC Admin</div>
+        <div class="brand-subtitle">Admin Panel</div>
+      </div>
+    </div>
+    <div class="sidebar-menu">
+      <div class="sidebar-heading">Menu Chính</div>
+      <a th:href="@{/admin/dashboard}" th:classappend="${active == 'dashboard'} ? 'active' : ''"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+      
+      <div class="sidebar-heading">Quản Lý Nội Dung</div>
+      <a th:href="@{/admin/banners}" th:classappend="${active == 'banners'} ? 'active' : ''"><i class="fa-solid fa-image"></i> Quản lý Banner</a>
+      <a th:href="@{/admin/about}" th:classappend="${active == 'about'} ? 'active' : ''"><i class="fa-solid fa-address-card"></i> Về chúng tôi</a>
+      <a th:href="@{/admin/industries}" th:classappend="${active == 'industries'} ? 'active' : ''"><i class="fa-solid fa-industry"></i> Lĩnh vực</a>
+      <a th:href="@{/admin/services}" th:classappend="${active == 'services'} ? 'active' : ''"><i class="fa-solid fa-concierge-bell"></i> Dịch vụ</a>
+      <a th:href="@{/admin/projects}" th:classappend="${active == 'projects'} ? 'active' : ''"><i class="fa-solid fa-building"></i> Dự án & Đối tác</a>
+      <a th:href="@{/admin/news}" th:classappend="${active == 'news'} ? 'active' : ''"><i class="fa-regular fa-newspaper"></i> Tin tức & Hình ảnh</a>
+      
+      <div class="sidebar-heading">Tương Tác Khách Hàng</div>
+      <a th:href="@{/admin/forms}" th:classappend="${active == 'forms'} ? 'active' : ''"><i class="fa-solid fa-wpforms"></i> Đăng ký khảo sát</a>
+      <a th:href="@{/admin/contact}" th:classappend="${active == 'contact'} ? 'active' : ''"><i class="fa-solid fa-phone"></i> Thông tin liên hệ</a>
+    </div>
+  </div>
+</body>
+</html>

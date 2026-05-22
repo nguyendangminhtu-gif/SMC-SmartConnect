@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart connect UAV - Đào tạo UAV chuyên nghiệp từ con số 0</title>
+    <meta name="description" content="Trung tâm Đào tạo Công nghệ SMC - Cấp chứng chỉ UAV do Bộ Quốc Phòng cấp. Đáp ứng quy định mới từ 01/07/2026. �?i ngu chuy�n gia gi�u kinh nghi?m s?n s�ng h? tr? k? thu?t v� gi?i ph�p t?i uu cho m?i nhu c?u ?ng d?ng c�ng ngh? m�y bay kh�ng ngu?i l�i c?a b?n.">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=1779413691038">
+    <!-- Google Analytics & Schema.org -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "SMC SmartConnect",
+      "url": "https://daotaouav.io.vn/",
+      "logo": "https://daotaouav.io.vn/images/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "1900 638 939",
+        "contactType": "customer service"
+      }
+    }
+    </script>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://daotaouav.io.vn/index.html">
+    <meta property="og:title" content="Smart connect UAV - Đào tạo UAV chuyên nghiệp từ con số 0">
+    <meta property="og:description" content="Trung tâm Đào tạo Công nghệ SMC - Cấp chứng chỉ UAV do Bộ Quốc Phòng cấp. Đáp ứng quy định mới từ 01/07/2026. �?i ngu chuy�n gia gi�u kinh nghi?m s?n s�ng h? tr? k? thu?t v� gi?i ph�p t?i uu cho m?i nhu c?u ?ng d?ng c�ng ngh? m�y bay kh�ng ngu?i l�i c?a b?n.">
+    <meta property="og:image" content="https://daotaouav.io.vn/images/hero.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://daotaouav.io.vn/index.html">
+    <meta name="twitter:title" content="Smart connect UAV - Đào tạo UAV chuyên nghiệp từ con số 0">
+    <meta name="twitter:description" content="Trung tâm Đào tạo Công nghệ SMC - Cấp chứng chỉ UAV do Bộ Quốc Phòng cấp. Đáp ứng quy định mới từ 01/07/2026. �?i ngu chuy�n gia gi�u kinh nghi?m s?n s�ng h? tr? k? thu?t v� gi?i ph�p t?i uu cho m?i nhu c?u ?ng d?ng c�ng ngh? m�y bay kh�ng ngu?i l�i c?a b?n.">
+    <meta name="twitter:image" content="https://daotaouav.io.vn/images/hero.png">
+</head>
+<body>
+
+    <!-- Automated Sync Test by Antigravity -->
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="SMC Logo" class="nav-logo-img">
+                <span>SMC SmartConnect</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Trang chủ</a></li>
+                <li class="dropdown-trigger">
+                    <a href="#">Về chúng tôi <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="chung-toi-la-ai.html">Chúng tôi là ai</a></li>
+                        <li><a href="chung-toi-lam-gi.html">Chúng tôi làm gì</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-trigger">
+                    <a href="#">Lĩnh vực <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="linh-vuc-dia-oc.html">Lĩnh vực Địa ốc</a></li>
+                        <li><a href="linh-vuc-xay-dung.html">Lĩnh vực Xây dựng</a></li>
+                        <li><a href="linh-vuc-tam-lop.html">Lĩnh vực Tấm lợp</a></li>
+                        <li><a href="linh-vuc-nang-luong.html">Lĩnh vực Năng lượng</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-trigger">
+                    <a href="#">Dịch vụ <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i></a>
+                                        <ul class="dropdown" style="min-width: 350px;">
+                        <li><a href="dao-tao-cap-phep.html">Đào tạo bay UAV cơ bản - nâng cao</a></li>
+                        <li><a href="sat-hach-cap-phep.html">Sát hạch & cấp phép UAV</a></li>
+                        <li><a href="ung-dung-nong-nghiep.html">Ứng dụng UAV nông nghiệp</a></li>
+                        
+                        <li class="dropdown-trigger-sub">
+                            <a href="khao-sat-mapping.html" style="display: flex; justify-content: space-between; align-items: center;">Khảo sát - Mapping lập bản đồ <i class="fa-solid fa-chevron-right" style="font-size: 10px;"></i></a>
+                            <ul class="sub-dropdown">
+                                <li><a href="khao-sat-va-lap-ban-do-tren-khong.html">Khảo sát và lập bản đồ trên không</a></li>
+                                <li><a href="dich-vu-lap-ban-do-orthomosaic.html">Dịch vụ lập bản đồ Orthomosaic</a></li>
+                                <li><a href="mo-hinh-3d.html">Mô hình 3D</a></li>
+                                <li><a href="dich-vu-kiem-tra-mai-nha.html">Dịch vụ kiểm tra mái nhà</a></li>
+                                <li><a href="dich-vu-hinh-anh-nhiet.html">Dịch vụ hình ảnh nhiệt</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li class="dropdown-trigger-sub">
+                            <a href="quay-phim-su-kien.html" style="display: flex; justify-content: space-between; align-items: center;">Quay phim sự kiện - Truyền thông <i class="fa-solid fa-chevron-right" style="font-size: 10px;"></i></a>
+                            <ul class="sub-dropdown">
+                                <li><a href="bat-dong-san-thuong-mai.html">Bất động sản Thương mại</a></li>
+                                <li><a href="nhiep-anh-bat-dong-san-nha-o.html">Nhiếp ảnh bất động sản nhà ở</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li><a href="cung-cap-uav.html">Cung cấp UAV chính hãng</a></li>
+                    </ul>
+                </li>
+                <li><a href="doi-tac.html">Dự án & Đối tác</a></li>
+                <li><a href="tin-tuc.html">Tin tức & Hình ảnh</a></li>
+                <li><a href="index.html#contact">Liên hệ</a></li>
+            </ul>
+            <a href="#hero-register" class="btn btn-primary nav-btn">Đăng ký ngay</a>
+            <div class="menu-toggle" id="mobile-menu"><i class="fa-solid fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero" style="background-image: linear-gradient(rgba(26, 59, 140, 0.8), rgba(26, 59, 140, 0.7)), url('images/hero.png');">
+        <div class="container hero-grid">
+            <div class="hero-text-content">
+                <h1 style="text-align: left;">HỌC & THI CHỨNG CHỈ UAV/DRONE</h1>
+                <h2 class="hero-sub" style="font-size: 20px; font-weight: 500; text-align: left;">Đào tạo bài bản – Hỗ trợ thi chứng chỉ – Ứng dụng thực tế</h2>
+                <p class="subtitle" style="text-align: left; margin-left: 0;">Từ 01/07/2026, quy định sử dụng UAV/Drone sẽ chặt chẽ hơn. Đăng ký ngay để nắm rõ quy định và kỹ năng bay an toàn.</p>
+                <div style="text-align: left;">
+                    <ul class="hero-list" style="margin-bottom: 20px; text-align: left; padding-left: 0;">
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-check-circle" style="color: #10b981;"></i> Cam kết đầu ra chứng chỉ hợp lệ</li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-check-circle" style="color: #10b981;"></i> Lịch học linh hoạt cho người đi làm</li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-check-circle" style="color: #10b981;"></i> Thực hành trên máy bay chuyên dụng</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="hero-form-box">
+                <form id="hero-register" class="hero-register-form">
+                    <h3 class="form-title" style="color: var(--primary-blue); font-size: 22px; margin-bottom: 15px;">Đăng Ký Khảo Sát Miễn Phí</h3>
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <input type="text" placeholder="Họ và tên *" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <input type="tel" placeholder="Số điện thoại *" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <input type="text" placeholder="Khu vực đang sống/làm việc *" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <select required>
+                            <option value="" disabled selected>Nhu cầu học của bạn? *</option>
+                            <option value="daotao">Đào tạo lái UAV</option>
+                            <option value="thi">Thi chứng chỉ</option>
+                            <option value="nongnghiep">Ứng dụng nông nghiệp</option>
+                            <option value="khaosat">Khảo sát – Mapping</option>
+                            <option value="quayphim">Quay phim – Truyền thông</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <input type="text" placeholder="Thời gian mong muốn học *" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block" style="font-size: 16px; padding: 12px;">GỬI THÔNG TIN ĐĂNG KÝ <i class="fa-solid fa-paper-plane"></i></button>
+                    <p style="font-size: 13px; color: #666; margin-top: 10px; text-align: center;">* Thông tin của bạn được bảo mật tuyệt đối</p>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <!-- Legal & About Section -->
+    <section class="about-legal container">
+        <div class="legal-card warning-box">
+            <div class="warning-header">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <h3>Lý do nên học ngay: Quy định 01/07/2026</h3>
+            </div>
+            <div class="warning-content">
+                <p>Theo quy định mới nhất từ <strong>Nghị định 288/2025/NĐ-CP</strong> và <strong>Thông tư 146/2025/TT-BQP</strong>, mọi cá nhân điều khiển UAV/Drone <strong>BẮT BUỘC</strong> phải qua đào tạo và có chứng chỉ/giấy phép hợp lệ.</p>
+                <ul class="danger-list">
+                    <li><i class="fa-solid fa-circle-exclamation" style="flex-shrink: 0; margin-top: 4px;"></i> <span>Người vận hành cần nắm rõ quy định và điều kiện pháp lý.</span></li>
+                    <li><i class="fa-solid fa-circle-xmark" style="flex-shrink: 0; margin-top: 4px;"></i> <span><strong>KHÔNG</strong> có chứng chỉ <i class="fa-solid fa-arrow-right"></i> KHÔNG được phép bay</span></li>
+                    <li><i class="fa-solid fa-circle-xmark" style="flex-shrink: 0; margin-top: 4px;"></i> <span><strong>KHÔNG</strong> đủ điều kiện <i class="fa-solid fa-arrow-right"></i> KHÔNG được sử dụng UAV</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="legal-card about-box">
+            <div class="about-header">
+                <i class="fa-solid fa-building-shield"></i>
+                <h3>Về Đơn vị chủ quản SMC</h3>
+            </div>
+            <div class="about-content">
+                <p><strong>Trung tâm Đào tạo Công nghệ SMC</strong> trực thuộc <strong>Công ty TNHH Công nghệ Smartconnect</strong> - Doanh nghiệp hoạt động mạnh mẽ trong lĩnh vực công nghệ, cung cấp giải pháp tự động hóa, IoT, AI và hệ sinh thái "Thành phố thông minh" (Smart City) tại Việt Nam.</p>
+                <p>Việc thành lập trung tâm UAV là bước mở rộng chiến lược, kết hợp nền tảng công nghệ sẵn có với các nhu cầu thực tế mang đến trải nghiệm học tập chuẩn mực và hiện đại nhất.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us / Lợi ích khóa học -->
+    <section class="why-us bg-light">
+        <div class="container">
+            <h2 class="section-title">LỢI ÍCH KHÓA HỌC TẠI SMC</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="icon-circle"><i class="fa-solid fa-plane-departure"></i></div>
+                    <h3>Học thực hành trực tiếp</h3>
+                    <p>Trải nghiệm bay thực tế và bay mô phỏng bài bản.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon-circle"><i class="fa-solid fa-map-location-dot"></i></div>
+                    <h3>Lớp học gần nơi ở</h3>
+                    <p>Hệ thống địa điểm học và sân tập thực hành được sắp xếp thông minh.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon-circle"><i class="fa-regular fa-calendar-check"></i></div>
+                    <h3>Lịch học linh hoạt</h3>
+                    <p>Phù hợp với người đi làm, chủ động sắp xếp thời gian.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon-circle"><i class="fa-solid fa-file-signature"></i></div>
+                    <h3>Hỗ trợ thi chứng chỉ</h3>
+                    <p>Hỗ trợ toàn bộ quy trình làm hồ sơ đăng ký, xin phép bay đúng luật.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon-circle"><i class="fa-solid fa-headset"></i></div>
+                    <h3>Tư vấn UAV phù hợp</h3>
+                    <p>Được chuyên gia định hướng chọn mua thiết bị chuẩn nhu cầu.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon-circle"><i class="fa-solid fa-briefcase"></i></div>
+                    <h3>Ứng dụng thực tế cao</h3>
+                    <p>Áp dụng ngay vào nông nghiệp, khảo sát, quay phim, truyền thông.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Audience Section -->
+    <section class="audience-section container" style="padding-top: 60px; padding-bottom: 60px;">
+        <h2 class="section-title">ĐỐI TƯỢNG PHÙ HỢP</h2>
+        <div class="grid-2col" style="margin-top: 40px;">
+            <div style="background: var(--light-blue-bg); padding: 30px; border-radius: 12px;">
+                <ul class="danger-list" style="background: transparent; padding: 0;">
+                    <li style="font-size: 16px; margin-bottom: 20px;"><i class="fa-solid fa-check" style="color:var(--primary-blue); font-size:20px; flex-shrink: 0; margin-top: 2px;"></i> <span><strong>Cá nhân:</strong> Người muốn học lái Drone chuyên nghiệp hoặc cần có chứng chỉ để sử dụng bay hợp pháp theo luật định.</span></li>
+                    <li style="font-size: 16px; margin-bottom: 20px;"><i class="fa-solid fa-check" style="color:var(--primary-blue); font-size:20px; flex-shrink: 0; margin-top: 2px;"></i> <span><strong>Đơn vị nông nghiệp:</strong> Chủ trang trại lớn, Hợp tác xã ứng dụng máy bay xịt thuốc.</span></li>
+                </ul>
+            </div>
+            <div style="background: var(--light-blue-bg); padding: 30px; border-radius: 12px;">
+                <ul class="danger-list" style="background: transparent; padding: 0;">
+                    <li style="font-size: 16px; margin-bottom: 20px;"><i class="fa-solid fa-check" style="color:var(--primary-blue); font-size:20px; flex-shrink: 0; margin-top: 2px;"></i> <span><strong>Doanh nghiệp xây dựng:</strong> Công ty khảo sát, trắc địa, quy hoạch, bất động sản cần đo đạc lập bản đồ RTK/LiDAR.</span></li>
+                    <li style="font-size: 16px; margin-bottom: 20px;"><i class="fa-solid fa-check" style="color:var(--primary-blue); font-size:20px; flex-shrink: 0; margin-top: 2px;"></i> <span><strong>Truyền thông & Sự kiện:</strong> Media agency, công ty quảng cáo, đoàn làm phim cần nâng cao kỹ năng quay phim trên không.</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs 6-Grid Section -->
+    <section id="programs" class="programs-6grid-section bg-light">
+        <div class="container">
+            <h2 class="section-title">CHƯƠNG TRÌNH ĐÀO TẠO & DỊCH VỤ</h2>
+            <p class="section-desc">Click vào từng chương trình để xem chi tiết nội dung và thông số kỹ thuật thực tế.</p>
+            
+            <div class="grid-6col">
+                <a href="dao-tao-cap-phep.html" class="prog-card">
+                    <div class="prog-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <h4>ĐÀO TẠO BAY UAV CƠ BẢN - NÂNG CAO</h4>
+                    <p>Hỗ trợ thủ tục nhanh, đúng quy định</p>
+                    <span class="view-more">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+                <a href="sat-hach-cap-phep.html" class="prog-card">
+                    <div class="prog-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+                    <h4>SÁT HẠCH & CẤP PHÉP UAV</h4>
+                    <p>Quy trình bài bản, đảm bảo đạt chuẩn</p>
+                    <span class="view-more">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+                <a href="ung-dung-nong-nghiep.html" class="prog-card">
+                    <div class="prog-icon"><i class="fa-solid fa-seedling"></i></div>
+                    <h4>ỨNG DỤNG UAV NÔNG NGHIỆP</h4>
+                    <p>Phun thuốc, rải phân, giám sát cây trồng</p>
+                    <span class="view-more">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+                <a href="khao-sat-mapping.html" class="prog-card">
+                    <div class="prog-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                    <h4>KHẢO SÁT – MAPPING LẬP BẢN ĐỒ</h4>
+                    <p>Chính xác – Nhanh chóng – Hiệu quả</p>
+                    <span class="view-more">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+                <a href="quay-phim-su-kien.html" class="prog-card">
+                    <div class="prog-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                    <h4>QUAY PHIM SỰ KIỆN – TRUYỀN THÔNG</h4>
+                    <p>Hình ảnh chất lượng cao, chuyên nghiệp</p>
+                    <span class="view-more">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+                <a href="cung-cap-uav.html" class="prog-card">
+                    <div class="prog-icon"><i class="fa-solid fa-box"></i></div>
+                    <h4>CUNG CẤP UAV CHÍNH HÃNG</h4>
+                    <p>Đa dạng chủng loại, bảo hành uy tín</p>
+                    <span class="view-more">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section class="roadmap-section container" style="padding-top: 60px; padding-bottom: 60px;">
+        <h2 class="section-title">LỘ TRÌNH HỌC & THI CHỨNG CHỈ</h2>
+        <p class="section-desc">Quy trình bài bản, tinh gọn giúp bạn nắm vững kỹ năng và thi đạt chứng chỉ nhanh chóng.</p>
+        <div class="roadmap-container">
+            <div class="roadmap-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Tư vấn & Khảo sát</h3>
+                    <p>Khảo sát nhu cầu thực tế, tư vấn chọn dòng máy bay và gói học đào tạo phù hợp nhất với học viên.</p>
+                </div>
+            </div>
+            <div class="roadmap-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Học Lý thuyết (Luật & Kỹ thuật)</h3>
+                    <p>Nắm vững luật bay, nghị định 288/2025/NĐ-CP, nguyên lý hoạt động thiết bị và các quy định an toàn bay cơ bản.</p>
+                </div>
+            </div>
+            <div class="roadmap-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Thực hành bay sa hình & Thực tế</h3>
+                    <p>Luyện tập điều khiển trực tiếp trên các dòng UAV chuyên dụng (Nông nghiệp/Quay phim/Khảo sát) dưới sự kèm cặp 1-1 của chuyên gia.</p>
+                </div>
+            </div>
+            <div class="roadmap-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Thi sát hạch & Nhận chứng chỉ</h3>
+                    <p>Hỗ trợ toàn bộ hồ sơ đăng ký thi sát hạch. Hoàn thành kỳ thi để nhận chứng chỉ/giấy phép vận hành UAV hợp lệ toàn quốc.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructors Section -->
+    <section class="instructors-section bg-light" style="padding-top: 60px; padding-bottom: 60px;">
+        <div class="container">
+            <h2 class="section-title">ĐỘI NGŨ CHUYÊN GIA ĐÀO TẠO</h2>
+            <p class="section-desc">Học hỏi trực tiếp từ những chuyên gia hàng đầu với hàng nghìn giờ bay thực tế trong nhiều lĩnh vực.</p>
+            <div class="instructors-grid">
+                <div class="instructor-card" style="background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center;">
+                    <img src="images/instructor_tech.png" alt="Chuyên gia Kỹ thuật" style="width: 100%; height: 250px; object-fit: cover; object-position: center;">
+                    <div style="padding: 20px;">
+                        <h3 style="color: var(--primary-blue); font-size: 20px; font-weight: 700; margin-bottom: 5px;">Chuyên gia Kỹ thuật</h3>
+                        <p style="color: var(--accent-red); font-weight: 600; font-size: 14px; margin-bottom: 10px;">Cố vấn vận hành UAV</p>
+                        <p style="color: var(--text-gray); font-size: 14px;">Nhiều năm kinh nghiệm vận hành UAV nông nghiệp & trắc địa. Chuyên gia đào tạo bay sa hình phức tạp.</p>
+                    </div>
+                </div>
+                <div class="instructor-card" style="background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center;">
+                    <img src="images/instructor_media.png" alt="Giảng viên Media" style="width: 100%; height: 250px; object-fit: cover; object-position: center;">
+                    <div style="padding: 20px;">
+                        <h3 style="color: var(--primary-blue); font-size: 20px; font-weight: 700; margin-bottom: 5px;">Giảng viên Media</h3>
+                        <p style="color: var(--accent-red); font-weight: 600; font-size: 14px; margin-bottom: 10px;">Chuyên gia Quay phim trên không</p>
+                        <p style="color: var(--text-gray); font-size: 14px;">Kinh nghiệm thực hiện hàng trăm dự án sự kiện lớn. Hướng dẫn kỹ thuật quay phim, nhiếp ảnh bay đỉnh cao.</p>
+                    </div>
+                </div>
+                <div class="instructor-card" style="background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center;">
+                    <img src="images/instructor_legal.png" alt="Cố vấn Pháp chế" style="width: 100%; height: 250px; object-fit: cover; object-position: center;">
+                    <div style="padding: 20px;">
+                        <h3 style="color: var(--primary-blue); font-size: 20px; font-weight: 700; margin-bottom: 5px;">Cố vấn Pháp chế</h3>
+                        <p style="color: var(--accent-red); font-weight: 600; font-size: 14px; margin-bottom: 10px;">Chuyên gia Pháp lý bay</p>
+                        <p style="color: var(--text-gray); font-size: 14px;">Đảm bảo học viên nắm rõ quy định vùng cấm bay, luật định mới nhất và hỗ trợ thủ tục cấp phép nhanh chóng.</p>
+                    </div>
+                </div>
+                <div class="instructor-card" style="background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center;">
+                    <img src="images/instructor_military.png" alt="Giảng viên Trường Sĩ quan Không quân" style="width: 100%; height: 250px; object-fit: cover; object-position: center;">
+                    <div style="padding: 20px;">
+                        <h3 style="color: var(--primary-blue); font-size: 20px; font-weight: 700; margin-bottom: 5px;">Giảng viên Trường Sĩ quan Không quân</h3>
+                        <p style="color: var(--accent-red); font-weight: 600; font-size: 14px; margin-bottom: 10px;">Chuyên gia Đào tạo Bay</p>
+                        <p style="color: var(--text-gray); font-size: 14px;">Chuyên gia và các giảng viên của Trường Sĩ quan Không quân trực tiếp tham gia đào tạo bài bản.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="testimonial-section container" style="padding-top: 60px; padding-bottom: 60px;">
+        <h2 class="section-title">HỌC VIÊN NÓI GÌ VỀ SMC</h2>
+        <p class="section-desc">Hàng trăm học viên và đơn vị doanh nghiệp đã tin tưởng lựa chọn Trung tâm đào tạo SMC.</p>
+        <div class="testimonial-grid">
+            <div class="review-card" style="background: var(--white); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
+                <div style="display: flex; gap: 5px; color: var(--gold); margin-bottom: 15px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p style="color: var(--text-gray); font-style: italic; margin-bottom: 20px;">"Trung tâm hướng dẫn rất tận tình. Nhờ có chứng chỉ của SMC mà hợp tác xã nông nghiệp của chúng tôi mới đáp ứng được điều kiện để bay rải phân bón hợp pháp, không lo bị phạt."</p>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 50px; height: 50px; background: #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-user"></i></div>
+                    <div>
+                        <h4 style="font-weight: 700; color: var(--text-dark); font-size: 16px;">Anh Hoàng Văn T.</h4>
+                        <span style="font-size: 13px; color: #64748b;">Chủ trang trại, Đồng Tháp</span>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card" style="background: var(--white); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
+                <div style="display: flex; gap: 5px; color: var(--gold); margin-bottom: 15px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p style="color: var(--text-gray); font-style: italic; margin-bottom: 20px;">"Khóa học cực kỳ thực tế. Giảng viên cầm tay chỉ việc, bãi tập rộng rãi thoải mái. Nhờ đó mà bây giờ tôi đã tự tin nhận các hợp đồng quay phim sự kiện ngoài trời bằng flycam."</p>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 50px; height: 50px; background: #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-user"></i></div>
+                    <div>
+                        <h4 style="font-weight: 700; color: var(--text-dark); font-size: 16px;">Nguyễn Thành Nam</h4>
+                        <span style="font-size: 13px; color: #64748b;">Freelancer Media, Hà Nội</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section bg-light" style="padding-top: 60px; padding-bottom: 60px;">
+        <div class="container" style="max-width: 800px;">
+            <h2 class="section-title">CÂU HỎI THƯỜNG GẶP</h2>
+            <div class="faq-container" style="margin-top: 40px;">
+                <div class="faq-item" style="background: var(--white); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 15px; padding: 20px;">
+                    <h4 style="font-size: 18px; font-weight: 700; color: var(--primary-blue); display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">Khóa học kéo dài trong bao lâu?</h4>
+                    <p style="color: var(--text-gray);">Tùy thuộc vào gói đào tạo (Cơ bản hay Nâng cao), thời gian học dao động từ 3 ngày đến 1 tuần, bao gồm cả lý thuyết và thực hành. Lịch học có thể sắp xếp linh hoạt vào cuối tuần cho người đi làm.</p>
+                </div>
+                <div class="faq-item" style="background: var(--white); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 15px; padding: 20px;">
+                    <h4 style="font-size: 18px; font-weight: 700; color: var(--primary-blue); display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">Tôi chưa có máy bay UAV thì có đăng ký học được không?</h4>
+                    <p style="color: var(--text-gray);">Hoàn toàn được! Trung tâm SMC sẽ cung cấp toàn bộ thiết bị (UAV chuyên dụng) để bạn thực hành trong suốt quá trình học. Bạn không cần phải mua trước máy bay.</p>
+                </div>
+                <div class="faq-item" style="background: var(--white); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 15px; padding: 20px;">
+                    <h4 style="font-size: 18px; font-weight: 700; color: var(--primary-blue); display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">Học phí bao nhiêu? Có hỗ trợ chi phí thi chứng chỉ không?</h4>
+                    <p style="color: var(--text-gray);">Học phí phụ thuộc vào nhu cầu (Nông nghiệp, Quay phim hay Trắc địa). Chúng tôi có gói Combo bao gồm trọn gói chi phí đào tạo và lệ phí hỗ trợ làm hồ sơ thi chứng chỉ. Vui lòng điền form tư vấn ở đầu trang để được báo giá chi tiết.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / Contact Section -->
+    <section class="cta-section" style="padding-top: 80px; padding-bottom: 80px; text-align: center; background: var(--primary-blue); color: white;">
+        <div class="container" style="max-width: 800px;">
+            <h2 style="font-size: 36px; font-weight: 900; margin-bottom: 20px;">Đăng ký khảo sát ngay hôm nay</h2>
+            <p style="font-size: 18px; margin-bottom: 40px; opacity: 0.9;">Trung tâm sẽ liên hệ tư vấn lộ trình học phù hợp nhất với bạn.</p>
+            
+            <div style="font-size: 20px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 40px;">
+                <div style="display: flex; align-items: center; gap: 15px;"><i class="fa-solid fa-phone" style="color:var(--primary-blue); background:white; padding:15px; border-radius:50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2);"></i> <strong>0902 596 999</strong></div>
+                <div style="display: flex; align-items: center; gap: 15px;"><i class="fa-solid fa-envelope" style="color:var(--primary-blue); background:white; padding:15px; border-radius:50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2);"></i> <strong>sales@smartconnect.com.vn</strong></div>
+            </div>
+            
+            <a href="#hero-register" class="btn btn-white btn-large" style="font-size: 18px;">ĐIỀN FORM TƯ VẤN NGAY <i class="fa-solid fa-arrow-up" style="margin-left: 8px;"></i></a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+        <footer id="contact">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo-wrapper">
+                    <div class="footer-logo-bg">
+                        <img src="images/logo.png" alt="SMC Logo" class="footer-logo-img">
+                    </div>
+                    <h4 class="footer-logo-text">SMC SmartConnect</h4>
+                </div>
+                <p class="copyright">© 2024 Công ty TNHH Công nghệ Smartconnect. Tất cả quyền được bảo lưu.</p>
+            </div>
+            <div class="footer-col">
+                <h5>TRUNG TÂM ĐÀO TẠO SMC</h5>
+                <ul class="contact-list">
+                    <li><i class="fa-solid fa-phone"></i> <span><strong>Hotline:</strong> 1900 638 939 (Nhánh 2)</span></li>
+                    <li><i class="fa-solid fa-mobile-screen"></i> <span><strong>SĐT:</strong> 0902 596 999</span></li>
+                    <li><i class="fa-solid fa-envelope"></i> <span><strong>Kinh doanh:</strong> sales@smartconnect.com.vn</span></li>
+                    <li><i class="fa-solid fa-envelope"></i> <span><strong>Đào tạo:</strong> ktsmc.coltd@gmail.com</span></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>MẠNG XÃ HỘI & LIÊN KẾT</h5>
+                <ul class="social-links">
+                    <li><a href="https://smartconnect.com.vn/" target="_blank"><i class="fa-solid fa-globe"></i> Website Công Ty</a></li>
+                    <li><a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fa-solid fa-comment-dots"></i> Zalo</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sticky Contact Widgets -->
+    <div class="sticky-widgets" style="position: fixed; bottom: 30px; right: 30px; z-index: 999; display: flex; flex-direction: column; gap: 15px;">
+        <a href="tel:0902596999" style="width: 55px; height: 55px; background: #ef4444; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); transition: transform 0.3s; text-decoration: none;" title="Gọi ngay"><i class="fa-solid fa-phone-volume"></i></a>
+        <a href="https://zalo.me/0902596999" target="_blank" style="width: 55px; height: 55px; background: #0068ff; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 900; box-shadow: 0 4px 15px rgba(0, 104, 255, 0.4); transition: transform 0.3s; text-decoration: none; font-family: sans-serif;" title="Chat Zalo">Z</a>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    e.preventDefault();
+                    document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
+                    if(this.classList.contains('active') === false && this.closest('.nav-links')) {
+                        this.classList.add('active');
+                    }
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+    <!-- Microformats vCard -->
+    <div class="vcard" style="display:none;">
+        <span class="fn org">SMC SmartConnect</span>
+        <div class="adr">
+            <span class="locality">Vietnam</span>
+        </div>
+        <span class="tel">1900 638 939</span>
+    </div>
+    <script src="mobile-menu.js?v=1779357610475"></script>
+    <script src="api_integration.js"></script>
+</body>
+</html>
+
+
+

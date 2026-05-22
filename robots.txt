@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://daotaouav.io.vn/sitemap.xml

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(title='Quản lý Đăng ký Khảo sát')}"></head>
+<body>
+  
+  <div th:replace="~{fragments/sidebar :: sidebar(active='forms')}"></div>
+
+  <div class="main-content">
+    <div th:replace="~{fragments/topbar :: topbar(title='Đăng ký Khảo sát')}"></div>
+    
+    <div class="content-wrapper">
+        
+        <!-- Manage Form Fields (Nhu cầu) -->
+        <div class="card p-4 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 style="font-weight: 700; color: #1e293b; margin: 0;">Quản lý mục "Nhu cầu học" trong Form</h5>
+                <button class="btn btn-primary" onclick="showAddFieldForm()"><i class="fa-solid fa-plus"></i> Thêm mục</button>
+            </div>
+            
+            <div class="table-card">
+                <table class="table table-hover mt-3">
+                    <thead>
+                        <tr>
+                            <th>TÊN MỤC</th>
+                            <th>TÙY CHỌN</th>
+                            <th>THAO TÁC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="field : ${fields}">
+                            <td th:text="${field.fieldName}" style="font-weight: 600;"></td>
+                            <td th:text="${field.options}"></td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-outline-warning" 
+                                        th:onclick="editField([[${field.id}]], [[${field.fieldName}]], [[${field.options}]])"><i class="fa-solid fa-pen"></i> Sửa</button>
+                                <form th:action="@{/admin/forms/fields/delete/{id}(id=${field.id})}" method="POST" style="display:inline;" onsubmit="event.preventDefault(); confirmDelete(this);">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i> Xóa</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Form Submissions List -->
+        <div class="card p-4">
+            <h5 class="mb-4" style="font-weight: 700; color: #1e293b; margin: 0;">Danh sách Đăng ký</h5>
+            <div class="table-card">
+                <table class="table table-hover mt-3">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>HỌ TÊN</th>
+                            <th>SĐT</th>
+                            <th>EMAIL</th>
+                            <th>NHU CẦU</th>
+                            <th>NGÀY GỬI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="sub : ${submissions}">
+                            <td th:text="${sub.id}" style="font-weight: 600;"></td>
+                            <td th:text="${sub.name}"></td>
+                            <td th:text="${sub.phone}"></td>
+                            <td th:text="${sub.email}"></td>
+                            <td th:text="${sub.needs}"></td>
+                            <td th:text="${sub.createdAt}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> <!-- Close content-wrapper -->
+  </div> <!-- Close main-content -->
+
+  <!-- Modal Field Form -->
+  <div class="modal fade" id="fieldModal" tabindex="-1" aria-labelledby="fieldModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="fieldModalLabel">Thêm/Sửa Mục form</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form th:action="@{/admin/forms/fields/save}" method="POST" id="fieldForm" onsubmit="event.preventDefault(); confirmSave(this);">
+                <input type="hidden" name="id" id="edit-field-id">
+                <div class="mb-4">
+                    <label class="form-label">Tên mục *</label>
+                    <input type="text" name="fieldName" id="edit-field-name" class="form-control" required placeholder="Ví dụ: Nhu cầu của bạn là gì?">
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Các tùy chọn (cách nhau bởi dấu phẩy) *</label>
+                    <input type="text" name="options" id="edit-field-options" class="form-control" required placeholder="Tự học, Đào tạo doanh nghiệp,...">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer" style="justify-content: flex-start;">
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('fieldForm').requestSubmit();" style="padding: 12px 30px; font-size: 16px;">Lưu Mục form</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div th:replace="~{fragments/scripts :: scripts}"></div>
+  <script>
+      let fieldModalInstance;
+      document.addEventListener("DOMContentLoaded", function(){
+          fieldModalInstance = new bootstrap.Modal(document.getElementById('fieldModal'));
+      });
+
+      function showAddFieldForm() {
+          document.getElementById('edit-field-id').value = '';
+          document.getElementById('edit-field-name').value = '';
+          document.getElementById('edit-field-options').value = '';
+          document.getElementById('fieldModalLabel').innerText = 'Thêm Mục form mới';
+          fieldModalInstance.show();
+      }
+
+      function editField(id, name, options) {
+          document.getElementById('edit-field-id').value = id;
+          document.getElementById('edit-field-name').value = name;
+          document.getElementById('edit-field-options').value = options;
+          document.getElementById('fieldModalLabel').innerText = 'Chỉnh sửa Mục form';
+          fieldModalInstance.show();
+      }
+  </script>
+</body>
+</html>

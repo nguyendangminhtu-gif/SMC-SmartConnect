@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Topbar</title>
+</head>
+<body>
+  <div th:fragment="topbar" class="topbar">
+    <div class="topbar-left">
+        <h5 class="m-0" th:text="${title}">Tổng quan</h5>
+    </div>
+    <div class="topbar-right">
+        <div class="notification-bell" style="position:relative; cursor:pointer; margin-right: 15px;">
+            <i class="fa-solid fa-bell" style="font-size:20px; color:#64748b;"></i>
+            <span style="position:absolute; top:-5px; right:-8px; background:#ef4444; color:white; font-size:10px; padding:2px 5px; border-radius:10px;">0</span>
+        </div>
+        <div class="user-profile">
+            <div class="avatar">A</div>
+            <div class="user-dropdown">
+                <div class="user-info">
+                    <strong>Admin</strong>
+                    <span>Administrator</span>
+                </div>
+                <hr>
+                <a th:href="@{/admin/logout}" class="btn-logout text-decoration-none">
+                    <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+                </a>
+            </div>
+        </div>
+    </div>
+  </div>
+</body>
+</html>

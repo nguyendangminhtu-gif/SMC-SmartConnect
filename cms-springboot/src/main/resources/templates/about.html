@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(title='Về Chúng Tôi')}"></head>
+<body>
+  
+  <div th:replace="~{fragments/sidebar :: sidebar(active='about')}"></div>
+
+  <div class="main-content">
+    <div th:replace="~{fragments/topbar :: topbar(title='Quản lý Về Chúng Tôi')}"></div>
+    
+    <div class="content-wrapper">
+        <div class="card p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 style="font-weight: 700; color: #1e293b; margin: 0;">Quản lý Về Chúng Tôi</h5>
+                <button class="btn btn-primary" onclick="showAddForm()"><i class="fa-solid fa-plus"></i> Thêm nội dung</button>
+            </div>
+            
+            <div class="table-card">
+                <table class="table table-hover mt-3">
+                    <thead>
+                        <tr>
+                            <th>TÊN MỤC</th>
+                            <th>HÌNH ẢNH</th>
+                            <th>NỘI DUNG</th>
+                            <th>THAO TÁC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="sec : ${sections}">
+                            <td th:text="${sec.sectionName}" style="font-weight: 600;"></td>
+                            <td style="width: 150px;"><img th:if="${sec.imageUrl != null}" th:src="${sec.imageUrl.startsWith('/') ? sec.imageUrl : '/' + sec.imageUrl}" class="image-preview" style="max-height: 80px; object-fit: cover;"></td>
+                            <td th:text="${sec.content != null ? (#strings.length(sec.content.replaceAll('<[^>]*>', '')) > 80 ? #strings.substring(sec.content.replaceAll('<[^>]*>', ''), 0, 80) + '...' : sec.content.replaceAll('<[^>]*>', '')) : ''}"></td>
+                            <td>
+                                <textarea style="display:none;" th:id="'content-data-' + ${sec.id}" th:text="${sec.content}"></textarea>
+                                <button type="button" class="btn btn-sm btn-outline-warning" 
+                                        th:onclick="editItem([[${sec.id}]], [[${sec.sectionName}]], [[${sec.imageUrl}]])">
+                                    <i class="fa-solid fa-pen"></i> Sửa
+                                </button>
+                                <form th:action="@{/admin/about/delete/{id}(id=${sec.id})}" method="POST" style="display:inline;" onsubmit="event.preventDefault(); confirmDelete(this);">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i> Xóa</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Modal Form -->
+  <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="formModalLabel">Thêm/Sửa Nội Dung</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form th:action="@{/admin/about/save}" method="POST" enctype="multipart/form-data" id="mainForm" onsubmit="event.preventDefault(); confirmSave(this);">
+                <input type="hidden" name="id" id="edit-id">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label class="form-label">Tên mục *</label>
+                        <input type="text" name="sectionName" id="edit-section" class="form-control" required placeholder="Ví dụ: Lịch sử hình thành">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label class="form-label">Tải lên Hình ảnh *</label>
+                        <input type="file" name="image" class="form-control" accept="image/*" onchange="previewImage(this)">
+                        <img id="image-preview-element" class="image-upload-preview" src="">
+                    </div>
+                    <div class="col-md-12 mb-4">
+                        <label class="form-label">Nội dung chi tiết</label>
+                        <textarea name="content" id="edit-content" class="form-control tinymce-editor" rows="10"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer" style="justify-content: flex-start;">
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('mainForm').requestSubmit();" style="padding: 12px 30px; font-size: 16px;">Lưu Nội dung</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div th:replace="~{fragments/scripts :: scripts}"></div>
+  <script>
+      let modalInstance;
+      document.addEventListener("DOMContentLoaded", function(){
+          modalInstance = new bootstrap.Modal(document.getElementById('formModal'));
+      });
+
+      function showAddForm() {
+          document.getElementById('edit-id').value = '';
+          document.getElementById('edit-section').value = '';
+          document.getElementById('image-preview-element').style.display = 'none';
+          if(tinymce.get('edit-content')) {
+              tinymce.get('edit-content').setContent('');
+          } else {
+              document.getElementById('edit-content').value = '';
+          }
+          document.getElementById('formModalLabel').innerText = 'Thêm Nội Dung Mới';
+          modalInstance.show();
+      }
+
+      function editItem(id, sectionName, imageUrl) {
+          document.getElementById('edit-id').value = id;
+          document.getElementById('edit-section').value = sectionName;
+          
+          if(imageUrl) {
+              document.getElementById('image-preview-element').src = imageUrl;
+              document.getElementById('image-preview-element').style.display = 'block';
+          } else {
+              document.getElementById('image-preview-element').style.display = 'none';
+          }
+          
+          let contentHtml = document.getElementById('content-data-' + id).value;
+          if(tinymce.get('edit-content')) {
+              tinymce.get('edit-content').setContent(contentHtml);
+          } else {
+              document.getElementById('edit-content').value = contentHtml;
+          }
+          
+          document.getElementById('formModalLabel').innerText = 'Chỉnh sửa Nội Dung';
+          modalInstance.show();
+      }
+
+      function previewImage(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                  document.getElementById('image-preview-element').src = e.target.result;
+                  document.getElementById('image-preview-element').style.display = 'block';
+              }
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
+  </script>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(title='Quản lý Lĩnh vực')}"></head>
+<body>
+  
+  <div th:replace="~{fragments/sidebar :: sidebar(active='industries')}"></div>
+
+  <div class="main-content">
+    <div th:replace="~{fragments/topbar :: topbar(title='Quản lý Lĩnh vực')}"></div>
+    
+    <div class="content-wrapper">
+        <div class="card p-4">
+            <h5 style="font-weight: 700; color: #1e293b; margin-bottom: 20px;">Quản lý Lĩnh vực</h5>
+            
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" th:classappend="${activeTab == 'DIA_OC'} ? 'active'" id="diaoc-tab" data-bs-toggle="tab" data-bs-target="#diaoc" type="button" role="tab">Lĩnh vực Địa ốc</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" th:classappend="${activeTab == 'XAY_DUNG'} ? 'active'" id="xaydung-tab" data-bs-toggle="tab" data-bs-target="#xaydung" type="button" role="tab">Lĩnh vực Xây dựng</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" th:classappend="${activeTab == 'TAM_LOP'} ? 'active'" id="tamlop-tab" data-bs-toggle="tab" data-bs-target="#tamlop" type="button" role="tab">Lĩnh vực Tấm lợp</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" th:classappend="${activeTab == 'NANG_LUONG'} ? 'active'" id="nangluong-tab" data-bs-toggle="tab" data-bs-target="#nangluong" type="button" role="tab">Lĩnh vực Năng lượng</button>
+              </li>
+            </ul>
+            
+            <div class="tab-content pt-4" id="myTabContent">
+              <!-- TAB ĐỊA ỐC -->
+              <div class="tab-pane fade" th:classappend="${activeTab == 'DIA_OC'} ? 'show active'" id="diaoc" role="tabpanel">
+                  <div class="alert alert-info">Cấu hình các hình ảnh cố định cho trang Lĩnh vực Địa ốc.</div>
+                  <form th:action="@{/admin/industries/saveFixed}" method="POST" enctype="multipart/form-data">
+                      <input type="hidden" name="industryCode" value="DIA_OC">
+                      <input type="hidden" name="id" th:value="${diaOc.id}">
+                      
+                      <div class="row">
+                          <div class="col-md-4 mb-3">
+                              <label class="form-label">Ảnh Banner (Trên cùng)</label>
+                              <input type="file" name="image1" class="form-control" accept="image/*">
+                              <div th:if="${diaOc.imageUrl1}"><img th:src="${diaOc.imageUrl1.startsWith('/') ? diaOc.imageUrl1 : '/' + diaOc.imageUrl1}" style="max-height:80px; margin-top:10px;"></div>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                              <label class="form-label">Ảnh Cột Trái (Tòa nhà)</label>
+                              <input type="file" name="image2" class="form-control" accept="image/*">
+                              <div th:if="${diaOc.imageUrl2}"><img th:src="${diaOc.imageUrl2.startsWith('/') ? diaOc.imageUrl2 : '/' + diaOc.imageUrl2}" style="max-height:80px; margin-top:10px;"></div>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                              <label class="form-label">Ảnh Lưới Khác</label>
+                              <input type="file" name="image3" class="form-control" accept="image/*">
+                              <div th:if="${diaOc.imageUrl3}"><img th:src="${diaOc.imageUrl3.startsWith('/') ? diaOc.imageUrl3 : '/' + diaOc.imageUrl3}" style="max-height:80px; margin-top:10px;"></div>
+                          </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary mt-3">Lưu thông tin cố định</button>
+                  </form>
+              </div>
+              
+              <!-- TAB XÂY DỰNG -->
+              <div class="tab-pane fade" th:classappend="${activeTab == 'XAY_DUNG'} ? 'show active'" id="xaydung" role="tabpanel">
+                  <div class="d-flex justify-content-between mb-3">
+                      <div class="alert alert-info mb-0" style="flex:1; margin-right:15px;">Quản lý các khối (block) thêm sửa xóa bao gồm Tiêu đề, Văn bản và Ảnh.</div>
+                      <button class="btn btn-primary" onclick="showDynamicForm('XAY_DUNG')"><i class="fa-solid fa-plus"></i> Thêm Block Mới</button>
+                  </div>
+                  <table class="table table-hover mt-3">
+                      <thead>
+                          <tr>
+                              <th>VỊ TRÍ</th>
+                              <th>TIÊU ĐỀ</th>
+                              <th>HÌNH ẢNH 1</th>
+                              <th>THAO TÁC</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr th:each="item : ${xayDung}">
+                              <td th:text="${item.displayOrder}"></td>
+                              <td th:text="${item.title}"></td>
+                              <td><img th:if="${item.imageUrl1}" th:src="${item.imageUrl1.startsWith('/') ? item.imageUrl1 : '/' + item.imageUrl1}" style="max-height:50px;"></td>
+                              <td>
+                                  <textarea style="display:none;" th:id="'content-xd-' + ${item.id}" th:text="${item.content}"></textarea>
+                                  <button type="button" class="btn btn-sm btn-outline-warning" 
+                                          th:onclick="editDynamic([[${item.id}]], 'XAY_DUNG', [[${item.title}]], null, [[${item.displayOrder}]], [[${item.imageUrl1}]], [[${item.imageUrl2}]], [[${item.imageUrl3}]], 'content-xd-' + [[${item.id}]])">Sửa</button>
+                                  <form th:action="@{/admin/industries/delete/{id}(id=${item.id})}" method="POST" style="display:inline;" onsubmit="event.preventDefault(); confirmDelete(this);">
+                                      <input type="hidden" name="tab" value="XAY_DUNG">
+                                      <button type="submit" class="btn btn-sm btn-outline-danger">Xóa</button>
+                                  </form>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+              
+              <!-- TAB TẤM LỢP -->
+              <div class="tab-pane fade" th:classappend="${activeTab == 'TAM_LOP'} ? 'show active'" id="tamlop" role="tabpanel">
+                  <div class="d-flex justify-content-between mb-3">
+                      <div class="alert alert-info mb-0" style="flex:1; margin-right:15px;">Thêm sửa xóa các phần thông tin trên ảnh (Tiêu đề phụ, Tiêu đề chính, Text, Ảnh).</div>
+                      <button class="btn btn-primary" onclick="showDynamicForm('TAM_LOP')"><i class="fa-solid fa-plus"></i> Thêm Block Mới</button>
+                  </div>
+                  <table class="table table-hover mt-3">
+                      <thead>
+                          <tr>
+                              <th>VỊ TRÍ</th>
+                              <th>TIÊU ĐỀ PHỤ</th>
+                              <th>TIÊU ĐỀ CHÍNH</th>
+                              <th>HÌNH ẢNH</th>
+                              <th>THAO TÁC</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr th:each="item : ${tamLop}">
+                              <td th:text="${item.displayOrder}"></td>
+                              <td th:text="${item.subtitle}"></td>
+                              <td th:text="${item.title}"></td>
+                              <td><img th:if="${item.imageUrl1}" th:src="${item.imageUrl1.startsWith('/') ? item.imageUrl1 : '/' + item.imageUrl1}" style="max-height:50px;"></td>
+                              <td>
+                                  <textarea style="display:none;" th:id="'content-tl-' + ${item.id}" th:text="${item.content}"></textarea>
+                                  <button type="button" class="btn btn-sm btn-outline-warning" 
+                                          th:onclick="editDynamic([[${item.id}]], 'TAM_LOP', [[${item.title}]], [[${item.subtitle}]], [[${item.displayOrder}]], [[${item.imageUrl1}]], null, null, 'content-tl-' + [[${item.id}]])">Sửa</button>
+                                  <form th:action="@{/admin/industries/delete/{id}(id=${item.id})}" method="POST" style="display:inline;" onsubmit="event.preventDefault(); confirmDelete(this);">
+                                      <input type="hidden" name="tab" value="TAM_LOP">
+                                      <button type="submit" class="btn btn-sm btn-outline-danger">Xóa</button>
+                                  </form>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+              
+              <!-- TAB NĂNG LƯỢNG -->
+              <div class="tab-pane fade" th:classappend="${activeTab == 'NANG_LUONG'} ? 'show active'" id="nangluong" role="tabpanel">
+                  <div class="alert alert-info">Chỉnh sửa ảnh thông tin cố định sẵn theo form của trang Lĩnh vực năng lượng.</div>
+                  <form th:action="@{/admin/industries/saveFixed}" method="POST" enctype="multipart/form-data">
+                      <input type="hidden" name="industryCode" value="NANG_LUONG">
+                      <input type="hidden" name="id" th:value="${nangLuong.id}">
+                      
+                      <div class="row">
+                          <div class="col-md-4 mb-3">
+                              <label class="form-label">Ảnh chính Năng lượng mặt trời</label>
+                              <input type="file" name="image1" class="form-control" accept="image/*">
+                              <div th:if="${nangLuong.imageUrl1}"><img th:src="${nangLuong.imageUrl1.startsWith('/') ? nangLuong.imageUrl1 : '/' + nangLuong.imageUrl1}" style="max-height:80px; margin-top:10px;"></div>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                              <label class="form-label">Ảnh Lưới 1</label>
+                              <input type="file" name="image2" class="form-control" accept="image/*">
+                              <div th:if="${nangLuong.imageUrl2}"><img th:src="${nangLuong.imageUrl2.startsWith('/') ? nangLuong.imageUrl2 : '/' + nangLuong.imageUrl2}" style="max-height:80px; margin-top:10px;"></div>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                              <label class="form-label">Ảnh Lưới 2</label>
+                              <input type="file" name="image3" class="form-control" accept="image/*">
+                              <div th:if="${nangLuong.imageUrl3}"><img th:src="${nangLuong.imageUrl3.startsWith('/') ? nangLuong.imageUrl3 : '/' + nangLuong.imageUrl3}" style="max-height:80px; margin-top:10px;"></div>
+                          </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary mt-3">Lưu thông tin cố định</button>
+                  </form>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Modal Form (Dynamic) -->
+  <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="formModalLabel">Thêm/Sửa Nội Dung</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form th:action="@{/admin/industries/saveDynamic}" method="POST" enctype="multipart/form-data" id="mainForm" onsubmit="event.preventDefault(); confirmSave(this);">
+                <input type="hidden" name="id" id="edit-id">
+                <input type="hidden" name="industryCode" id="edit-industryCode">
+                
+                <div class="row">
+                    <div class="col-md-2 mb-3">
+                        <label class="form-label">Vị trí (Order)</label>
+                        <input type="number" name="displayOrder" id="edit-order" class="form-control" value="0">
+                    </div>
+                    <div class="col-md-5 mb-3" id="wrapper-title">
+                        <label class="form-label">Tiêu đề chính</label>
+                        <input type="text" name="title" id="edit-title" class="form-control">
+                    </div>
+                    <div class="col-md-5 mb-3" id="wrapper-subtitle">
+                        <label class="form-label">Tiêu đề phụ (nếu có)</label>
+                        <input type="text" name="subtitle" id="edit-subtitle" class="form-control">
+                    </div>
+                    
+                    <div class="col-md-4 mb-3" id="wrapper-img1">
+                        <label class="form-label">Hình ảnh 1</label>
+                        <input type="file" name="image1" class="form-control" accept="image/*">
+                        <img id="preview-img1" style="max-height: 50px; display:none; margin-top:5px;">
+                    </div>
+                    <div class="col-md-4 mb-3" id="wrapper-img2">
+                        <label class="form-label">Hình ảnh 2</label>
+                        <input type="file" name="image2" class="form-control" accept="image/*">
+                        <img id="preview-img2" style="max-height: 50px; display:none; margin-top:5px;">
+                    </div>
+                    <div class="col-md-4 mb-3" id="wrapper-img3">
+                        <label class="form-label">Hình ảnh 3</label>
+                        <input type="file" name="image3" class="form-control" accept="image/*">
+                        <img id="preview-img3" style="max-height: 50px; display:none; margin-top:5px;">
+                    </div>
+                    
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label">Nội dung chi tiết</label>
+                        <textarea name="content" id="edit-content" class="form-control tinymce-editor" rows="10"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer" style="justify-content: flex-start;">
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('mainForm').requestSubmit();" style="padding: 12px 30px; font-size: 16px;">Lưu Nội dung</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div th:replace="~{fragments/scripts :: scripts}"></div>
+  <script>
+      let modalInstance;
+      document.addEventListener("DOMContentLoaded", function(){
+          modalInstance = new bootstrap.Modal(document.getElementById('formModal'));
+      });
+
+      function showDynamicForm(industryCode) {
+          document.getElementById('edit-id').value = '';
+          document.getElementById('edit-industryCode').value = industryCode;
+          document.getElementById('edit-title').value = '';
+          document.getElementById('edit-subtitle').value = '';
+          document.getElementById('edit-order').value = '0';
+          document.getElementById('preview-img1').style.display = 'none';
+          document.getElementById('preview-img2').style.display = 'none';
+          document.getElementById('preview-img3').style.display = 'none';
+          
+          if(tinymce.get('edit-content')) {
+              tinymce.get('edit-content').setContent('');
+          } else {
+              document.getElementById('edit-content').value = '';
+          }
+          
+          // Toggle fields based on industry
+          if (industryCode === 'XAY_DUNG') {
+              document.getElementById('wrapper-subtitle').style.display = 'none';
+              document.getElementById('wrapper-img2').style.display = 'block';
+              document.getElementById('wrapper-img3').style.display = 'block';
+          } else if (industryCode === 'TAM_LOP') {
+              document.getElementById('wrapper-subtitle').style.display = 'block';
+              document.getElementById('wrapper-img2').style.display = 'none';
+              document.getElementById('wrapper-img3').style.display = 'none';
+          }
+          
+          document.getElementById('formModalLabel').innerText = 'Thêm Nội Dung (' + industryCode + ')';
+          modalInstance.show();
+      }
+
+      function editDynamic(id, industryCode, title, subtitle, order, img1, img2, img3, contentId) {
+          document.getElementById('edit-id').value = id;
+          document.getElementById('edit-industryCode').value = industryCode;
+          document.getElementById('edit-title').value = title || '';
+          document.getElementById('edit-subtitle').value = subtitle || '';
+          document.getElementById('edit-order').value = order || '0';
+          
+          if(img1) { document.getElementById('preview-img1').src = (img1.startsWith('/') ? img1 : '/' + img1); document.getElementById('preview-img1').style.display = 'block'; }
+          else document.getElementById('preview-img1').style.display = 'none';
+          
+          if(img2) { document.getElementById('preview-img2').src = (img2.startsWith('/') ? img2 : '/' + img2); document.getElementById('preview-img2').style.display = 'block'; }
+          else document.getElementById('preview-img2').style.display = 'none';
+          
+          if(img3) { document.getElementById('preview-img3').src = (img3.startsWith('/') ? img3 : '/' + img3); document.getElementById('preview-img3').style.display = 'block'; }
+          else document.getElementById('preview-img3').style.display = 'none';
+          
+          let contentHtml = document.getElementById(contentId).value;
+          if(tinymce.get('edit-content')) {
+              tinymce.get('edit-content').setContent(contentHtml);
+          } else {
+              document.getElementById('edit-content').value = contentHtml;
+          }
+          
+          // Toggle fields based on industry
+          if (industryCode === 'XAY_DUNG') {
+              document.getElementById('wrapper-subtitle').style.display = 'none';
+              document.getElementById('wrapper-img2').style.display = 'block';
+              document.getElementById('wrapper-img3').style.display = 'block';
+          } else if (industryCode === 'TAM_LOP') {
+              document.getElementById('wrapper-subtitle').style.display = 'block';
+              document.getElementById('wrapper-img2').style.display = 'none';
+              document.getElementById('wrapper-img3').style.display = 'none';
+          }
+          
+          document.getElementById('formModalLabel').innerText = 'Sửa Nội Dung (' + industryCode + ')';
+          modalInstance.show();
+      }
+  </script>
+</body>
+</html>

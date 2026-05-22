@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(title='Tin tức & Hình ảnh')}"></head>
+<body>
+  
+  <div th:replace="~{fragments/sidebar :: sidebar(active='news')}"></div>
+
+  <div class="main-content">
+    <div th:replace="~{fragments/topbar :: topbar(title='Tin tức & Hình ảnh')}"></div>
+    
+    <div class="content-wrapper">
+        <div class="card p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 style="font-weight: 700; color: #1e293b; margin: 0;">Quản lý Tin tức</h5>
+                <button class="btn btn-primary" onclick="showAddForm()"><i class="fa-solid fa-plus"></i> Thêm bài viết</button>
+            </div>
+            
+            <div class="table-card">
+                <table class="table table-hover mt-3">
+                    <thead>
+                        <tr>
+                            <th>TIÊU ĐỀ</th>
+                            <th>HÌNH ẢNH</th>
+                            <th>NGÀY ĐĂNG</th>
+                            <th>THAO TÁC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${items}">
+                            <td th:text="${item.title}" th:title="${item.title}" style="font-weight: 600; max-width: 350px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></td>
+                            <td style="width: 150px;"><img th:if="${item.imageUrl != null}" th:src="${item.imageUrl.startsWith('/') ? item.imageUrl : '/' + item.imageUrl}" class="image-preview"></td>
+                            <td th:text="${item.createdAt}"></td>
+                            <td>
+                                <textarea style="display:none;" th:id="'content-data-' + ${item.id}" th:text="${item.content}"></textarea>
+                                <button type="button" class="btn btn-sm btn-outline-warning" 
+                                        th:onclick="editItem([[${item.id}]], [[${item.title}]], [[${item.slug}]], [[${item.metaTitle}]], [[${item.metaDescription}]], [[${item.metaKeywords}]], [[${item.imageUrl}]])">
+                                    <i class="fa-solid fa-pen"></i> Sửa
+                                </button>
+                                <form th:action="@{/admin/news/delete/{id}(id=${item.id})}" method="POST" style="display:inline;" onsubmit="event.preventDefault(); confirmDelete(this);">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i> Xóa</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Gallery Section -->
+        <div class="card p-4 mt-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 style="font-weight: 700; color: #1e293b; margin: 0;">Quản lý Hình ảnh</h5>
+                <button class="btn btn-primary" onclick="showAddGalleryForm()"><i class="fa-solid fa-plus"></i> Thêm hình ảnh</button>
+            </div>
+            
+            <div class="table-card">
+                <table class="table table-hover mt-3">
+                    <thead>
+                        <tr>
+                            <th>MÔ TẢ (ALT)</th>
+                            <th>HÌNH ẢNH</th>
+                            <th>THAO TÁC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="g : ${galleries}">
+                            <td th:text="${g.description}" style="font-weight: 600;"></td>
+                            <td style="width: 250px;"><img th:if="${g.imageUrl != null}" th:src="${g.imageUrl.startsWith('/') ? g.imageUrl : '/' + g.imageUrl}" class="image-preview" style="max-height:100px;"></td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-outline-warning" 
+                                        th:onclick="editGallery([[${g.id}]], [[${g.description}]], [[${g.imageUrl}]])">
+                                    <i class="fa-solid fa-pen"></i> Sửa
+                                </button>
+                                <form th:action="@{/admin/gallery/delete/{id}(id=${g.id})}" method="POST" style="display:inline;" onsubmit="event.preventDefault(); confirmDelete(this);">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i> Xóa</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Modal Form -->
+  <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="formModalLabel">Thêm/Sửa Tin tức</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form th:action="@{/admin/news/save}" method="POST" enctype="multipart/form-data" id="mainForm" onsubmit="event.preventDefault(); confirmSave(this);">
+                <input type="hidden" name="id" id="edit-id">
+                
+                <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab">Thông tin chung</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="seo-tab" data-bs-toggle="tab" data-bs-target="#seo" type="button" role="tab">Cấu hình SEO</button>
+                  </li>
+                </ul>
+                
+                <div class="tab-content" id="myTabContent">
+                  <!-- General Tab -->
+                  <div class="tab-pane fade show active" id="general" role="tabpanel">
+                      <div class="row">
+                          <div class="col-md-6 mb-4">
+                              <label class="form-label">Tiêu đề bài viết *</label>
+                              <input type="text" name="title" id="edit-title" class="form-control" required>
+                          </div>
+                          <div class="col-md-6 mb-4">
+                              <label class="form-label">Tải lên Hình ảnh *</label>
+                              <input type="file" name="image" id="edit-image" class="form-control" accept="image/*" onchange="previewImage(this)">
+                              <img id="image-preview-element" class="image-upload-preview" src="">
+                          </div>
+                          <div class="col-md-12 mb-4">
+                              <label class="form-label">Nội dung chi tiết</label>
+                              <textarea name="content" id="edit-content" class="form-control tinymce-editor" rows="15"></textarea>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <!-- SEO Tab -->
+                  <div class="tab-pane fade" id="seo" role="tabpanel">
+                      <div class="row">
+                          <div class="col-md-12 mb-4">
+                              <label class="form-label">Đường dẫn tĩnh (Slug)</label>
+                              <input type="text" name="slug" id="edit-slug" class="form-control" placeholder="vi-du-duong-dan-tinh">
+                              <small class="text-muted">Nếu để trống, hệ thống sẽ tự động tạo từ tiêu đề (tuỳ cấu hình backend).</small>
+                          </div>
+                          <div class="col-md-12 mb-4">
+                              <label class="form-label">Tiêu đề SEO (Meta Title)</label>
+                              <input type="text" name="metaTitle" id="edit-metaTitle" class="form-control">
+                          </div>
+                          <div class="col-md-12 mb-4">
+                              <label class="form-label">Từ khóa SEO (Meta Keywords)</label>
+                              <input type="text" name="metaKeywords" id="edit-metaKeywords" class="form-control" placeholder="uav, drone, flycam...">
+                          </div>
+                          <div class="col-md-12 mb-4">
+                              <label class="form-label">Mô tả SEO (Meta Description)</label>
+                              <textarea name="metaDescription" id="edit-metaDescription" class="form-control" rows="3"></textarea>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer" style="justify-content: flex-start;">
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('mainForm').requestSubmit();" style="padding: 12px 30px; font-size: 16px;">Lưu Bài viết</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gallery Modal Form -->
+  <div class="modal fade" id="galleryFormModal" tabindex="-1" aria-labelledby="galleryFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="galleryFormModalLabel">Thêm/Sửa Hình ảnh</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form th:action="@{/admin/gallery/save}" method="POST" enctype="multipart/form-data" id="galleryForm" onsubmit="event.preventDefault(); confirmSave(this);">
+                <input type="hidden" name="id" id="edit-gallery-id">
+                
+                <div class="mb-4">
+                    <label class="form-label">Mô tả hình ảnh (Thẻ ALT) *</label>
+                    <input type="text" name="description" id="edit-gallery-description" class="form-control" required>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Tải lên Hình ảnh *</label>
+                    <input type="file" name="image" id="edit-gallery-image" class="form-control" accept="image/*" onchange="previewGalleryImage(this)">
+                    <img id="gallery-image-preview-element" class="image-upload-preview" src="">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer" style="justify-content: flex-start;">
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('galleryForm').requestSubmit();" style="padding: 12px 30px; font-size: 16px;">Lưu Hình ảnh</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div th:replace="~{fragments/scripts :: scripts}"></div>
+  <script>
+      let modalInstance;
+      let galleryModalInstance;
+      document.addEventListener("DOMContentLoaded", function(){
+          modalInstance = new bootstrap.Modal(document.getElementById('formModal'));
+          galleryModalInstance = new bootstrap.Modal(document.getElementById('galleryFormModal'));
+      });
+
+      function showAddForm() {
+          document.getElementById('edit-id').value = '';
+          document.getElementById('edit-title').value = '';
+          document.getElementById('edit-slug').value = '';
+          document.getElementById('edit-metaTitle').value = '';
+          document.getElementById('edit-metaKeywords').value = '';
+          document.getElementById('edit-metaDescription').value = '';
+          document.getElementById('image-preview-element').style.display = 'none';
+          
+          if(tinymce.get('edit-content')) {
+              tinymce.get('edit-content').setContent('');
+          } else {
+              document.getElementById('edit-content').value = '';
+          }
+          
+          document.getElementById('formModalLabel').innerText = 'Thêm Tin tức Mới';
+          modalInstance.show();
+      }
+
+      function editItem(id, title, slug, metaTitle, metaDesc, metaKey, imageUrl) {
+          document.getElementById('edit-id').value = id;
+          document.getElementById('edit-title').value = title;
+          document.getElementById('edit-slug').value = slug || '';
+          document.getElementById('edit-metaTitle').value = metaTitle || '';
+          document.getElementById('edit-metaDescription').value = metaDesc || '';
+          document.getElementById('edit-metaKeywords').value = metaKey || '';
+          
+          if(imageUrl) {
+              document.getElementById('image-preview-element').src = imageUrl.startsWith('/') ? imageUrl : '/' + imageUrl;
+              document.getElementById('image-preview-element').style.display = 'block';
+          } else {
+              document.getElementById('image-preview-element').style.display = 'none';
+          }
+          
+          let contentHtml = document.getElementById('content-data-' + id).value;
+          if(tinymce.get('edit-content')) {
+              tinymce.get('edit-content').setContent(contentHtml);
+          } else {
+              document.getElementById('edit-content').value = contentHtml;
+          }
+          
+          document.getElementById('formModalLabel').innerText = 'Chỉnh sửa Tin tức';
+          modalInstance.show();
+      }
+
+      function previewImage(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                  document.getElementById('image-preview-element').src = e.target.result;
+                  document.getElementById('image-preview-element').style.display = 'block';
+              }
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
+
+      function showAddGalleryForm() {
+          document.getElementById('edit-gallery-id').value = '';
+          document.getElementById('edit-gallery-description').value = '';
+          document.getElementById('gallery-image-preview-element').style.display = 'none';
+          document.getElementById('galleryFormModalLabel').innerText = 'Thêm Hình ảnh Mới';
+          galleryModalInstance.show();
+      }
+
+      function editGallery(id, description, imageUrl) {
+          document.getElementById('edit-gallery-id').value = id;
+          document.getElementById('edit-gallery-description').value = description;
+          if(imageUrl) {
+              document.getElementById('gallery-image-preview-element').src = imageUrl.startsWith('/') ? imageUrl : '/' + imageUrl;
+              document.getElementById('gallery-image-preview-element').style.display = 'block';
+          } else {
+              document.getElementById('gallery-image-preview-element').style.display = 'none';
+          }
+          document.getElementById('galleryFormModalLabel').innerText = 'Chỉnh sửa Hình ảnh';
+          galleryModalInstance.show();
+      }
+
+      function previewGalleryImage(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                  document.getElementById('gallery-image-preview-element').src = e.target.result;
+                  document.getElementById('gallery-image-preview-element').style.display = 'block';
+              }
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
+  </script>
+</body>
+</html>
