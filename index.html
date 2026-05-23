@@ -242,12 +242,27 @@
             transform: scale(1.1);
         }
 
+        @keyframes pulse-zalo {
+            0% { box-shadow: 0 0 0 0 rgba(0, 104, 255, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 104, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 104, 255, 0); }
+        }
+
         .zalo-btn {
             background-color: #0068FF;
+            animation: pulse-zalo 2s infinite;
+        }
+
+        @keyframes pulse-phone {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
         }
 
         .phone-btn {
             background-color: #ef4444;
+            animation: pulse-phone 2s infinite;
+            animation-delay: 1s;
         }
 
         .accordion-content {
@@ -279,10 +294,10 @@
             <div class="container mx-auto px-4 md:px-8">
                 <div class="flex justify-between items-center">
                     <a href="#hero" class="flex items-center gap-3 group">
-                        <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center p-1 shadow-lg group-hover:scale-105 transition-transform">
+                        <div class="w-16 h-16 bg-white rounded-xl flex items-center justify-center p-1.5 shadow-lg group-hover:scale-105 transition-transform">
                             <img src="images/logo.png" alt="SMC Logo" class="w-full h-full object-contain">
                         </div>
-                        <span class="text-white font-heading font-black text-2xl tracking-tight">SMC<span
+                        <span class="text-white font-heading font-black text-3xl tracking-tight">SMC<span
                                 class="text-primary">Connect</span></span>
                     </a>
 
@@ -309,7 +324,7 @@
                         </a>
                     </div>
 
-                    <button id="menu-toggle" class="lg:hidden text-white text-3xl focus:outline-none">
+                    <button id="menu-toggle" class="lg:hidden text-white text-3xl focus:outline-none flex items-center justify-center w-12 h-12">
                         <i class="fa-solid fa-bars-staggered"></i>
                     </button>
                 </div>
@@ -382,18 +397,18 @@
                     </div>
 
                     <!-- Stats -->
-                    <div class="grid grid-cols-3 gap-6 mt-16 pt-8 border-t border-white/10 max-w-2xl">
-                        <div>
-                            <div class="text-3xl font-black text-white mb-1">5000+</div>
-                            <div class="text-sm text-slate-400 uppercase tracking-wider">Học viên</div>
+                    <div class="grid grid-cols-3 gap-2 md:gap-6 mt-16 pt-8 border-t border-white/10 max-w-2xl">
+                        <div class="flex flex-col items-center md:items-start">
+                            <div class="text-2xl md:text-3xl font-black text-white mb-1">5000+</div>
+                            <div class="text-[10px] md:text-sm text-slate-400 uppercase tracking-wider whitespace-nowrap">Học viên</div>
                         </div>
-                        <div>
-                            <div class="text-3xl font-black text-white mb-1">100%</div>
-                            <div class="text-sm text-slate-400 uppercase tracking-wider">Đỗ chứng chỉ</div>
+                        <div class="flex flex-col items-center md:items-start">
+                            <div class="text-2xl md:text-3xl font-black text-white mb-1">100%</div>
+                            <div class="text-[10px] md:text-sm text-slate-400 uppercase tracking-wider whitespace-nowrap">Đỗ chứng chỉ</div>
                         </div>
-                        <div>
-                            <div class="text-3xl font-black text-white mb-1">5+ Năm</div>
-                            <div class="text-sm text-slate-400 uppercase tracking-wider">Kinh nghiệm</div>
+                        <div class="flex flex-col items-center md:items-start">
+                            <div class="text-2xl md:text-3xl font-black text-white mb-1">5+ Năm</div>
+                            <div class="text-[10px] md:text-sm text-slate-400 uppercase tracking-wider whitespace-nowrap">Kinh nghiệm</div>
                         </div>
                     </div>
                 </div>
@@ -416,6 +431,10 @@
                                 </div>
                                 <div>
                                     <input type="tel" placeholder="Số điện thoại *" required
+                                        class="w-full bg-white/10 border border-white/20 text-white placeholder-slate-300 rounded-xl px-5 py-4 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all">
+                                </div>
+                                <div>
+                                    <input type="email" placeholder="Email *" required
                                         class="w-full bg-white/10 border border-white/20 text-white placeholder-slate-300 rounded-xl px-5 py-4 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all">
                                 </div>
                                 <div>
